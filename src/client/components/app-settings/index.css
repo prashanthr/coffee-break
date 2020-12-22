@@ -1,7 +1,25 @@
+.coffee-break-app-settings-grid {
+  /* margin-top: 2rem;
+  vertical-align: middle;
+  margin-left: 20%;
+  margin-right: 20%; */
+  width: 100%;
+  margin: 0 auto;
+}
+
 .coffee-break-app-settings {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr;
   grid-column-gap: 0px;
   grid-row-gap: 0px;
+}
+
+.coffee-break-app-settings-time {
+  display: inline-flex;
+}
+
+.coffee-break-app-setting-btn-update {
+  padding: 0.4em;
+  margin-top: 0.3em;
 }

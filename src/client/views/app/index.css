@@ -9,10 +9,7 @@
   vertical-align: middle;
 }
 
-.timer-grid {
-  
-}
-
-.settings-grid {
-
+.coffee-break-timer-grid {
+  margin: 0 auto;
+  width: 100%;
 }

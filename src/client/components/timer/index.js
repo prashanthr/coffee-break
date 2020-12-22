@@ -9,6 +9,7 @@ const { tick } = TimerLibrary.effects
 const Timer = ({ start, className, digitClassName, isPaused, strokeColor }) => {
   const { hour, minute, second } = start
   const [currentTime, setTime] = useState({ hour, minute, second })
+  console.log('start/currentTime', start, currentTime)
   useEffect(() => {
     const timer = setTimeout(() => {
       setTime(tick({ time: currentTime, countdown: true, isPaused }))
