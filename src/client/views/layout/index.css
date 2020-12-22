@@ -1,10 +1,10 @@
 :root {
-  --today-web-primary-color: white;
-  --today-web-secondary-color: #E6767A;
-  --today-web-tertiary-color: #5aaa95;
-  --today-web-error-color: #F7B267;
-  --today-web-link-color: #E6767A;
-  --today-web-link-hover-color: white;
+  --coffee-break-primary-color: white;
+  --coffee-break-secondary-color: #d367c1;
+  --coffee-break-tertiary-color: #00bbcb;
+  --coffee-break-error-color: #F7B267;
+  --coffee-break-link-color: #ab79d6;
+  --coffee-break-link-hover-color: white;
 }
 
 body {

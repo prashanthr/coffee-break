@@ -30,7 +30,7 @@ const Timer = ({ start, className, digitClassName, isPaused, strokeColor }) => {
 
 Timer.defaultProps = {
   isPaused: false,
-  strokeColor: 'orange',
+  strokeColor: '#d367c1',
   start: {
     hour: 0,
     minute: 15,

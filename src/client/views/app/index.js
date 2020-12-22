@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import Layout from '../layout'
 import Timer from '../../components/timer'
 import './index.css'
-import ButtonGroup from '../../components/button-group'
+import TimerControls from '../../components/timer-controls'
+import AppSettings from '../../components/app-settings';
 
 const App = () => {
   const [isPaused, togglePause] = useState(false)
@@ -16,20 +17,10 @@ const App = () => {
             digitClassName='coffee-break-timer-digit' 
             isPaused={isPaused}
           />
-          <ButtonGroup 
-            buttons={[{
-              name: 'pause',
-              value: isPaused ? 'Resume' : 'Pause',
-              onClick: () => togglePause(!isPaused)
-            }, {
-              name: 'take-a-break',
-              value: 'Take a break',
-              onClick: () => takeABreak()
-            }]}
-          />
+          <TimerControls isPaused={isPaused} onTogglePause={togglePause} onBreak={takeABreak} />
         </div>
         <div className='coffee-break-settings-grid'>
-          Settings
+          <AppSettings />
         </div>
       </div>
     </Layout>
