@@ -1,0 +1,105 @@
+:root {
+  --today-web-primary-color: white;
+  --today-web-secondary-color: #E6767A;
+  --today-web-tertiary-color: #5aaa95;
+  --today-web-error-color: #F7B267;
+  --today-web-link-color: #E6767A;
+  --today-web-link-hover-color: white;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #282c34;
+  
+  color: white;
+}
+
+.today-web-text-primary {
+  color: var(--today-web-primary-color)
+}
+
+.today-web-text-secondary {
+  color: var(--today-web-secondary-color)
+}
+
+.today-web-text-tertiary {
+  color: var(--today-web-tertiary-color)
+}
+
+.today-web-error-text {
+  color: var(--today-web-error-color)
+}
+
+.today-web-link-text {
+  color: var(--today-web-link-color)
+}
+
+a, a:visited, a:-webkit-any-link {
+  color: var(--today-web-link-color);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--today-web-link-hover-color);
+  /* text-decoration: underline; */
+  border-bottom: 1px dashed white;
+}
+
+.content {
+  margin-top: 7%;
+  display: grid;
+  grid-template-columns: 100%;
+  margin-left: 10%;
+  margin-right: 10%;
+  justify-content: center;
+  font-size: 24px;
+}
+
+.today-web-view-page {
+  margin-left: 10%;
+  margin-right: 10%;
+  text-align: center;
+  font-size: 24px;
+  padding-top: 20px;
+}
+
+@media all and (min-width: 750px) {
+  .today-web-view-page  {
+    margin-left: 10%;
+    margin-right: 10%;
+    text-align: center;
+    font-size: 24px;
+  }
+}
+
+.today-web-view-tagline {
+  font-size: 32px;
+}
+
+.today-web-heading-limit-form {
+  display: inline-block;
+}
+
+.today-web-heading-limit-input {
+  height: 20px; 
+}

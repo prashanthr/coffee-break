@@ -1,0 +1,19 @@
+.today-web-logo {
+  top: 0;
+  left: 0;
+  width: 100px;
+  position: absolute;
+}
+
+@media all and (min-width: 750px) {
+  .today-web-logo {
+    top: 0;
+    left: 0;
+    width: 250px;
+    position: absolute;
+  }
+}
+
+.today-web-logo a:hover {
+  border: none;
+}

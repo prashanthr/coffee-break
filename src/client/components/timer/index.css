@@ -1,0 +1,8 @@
+.coffee-break-timer {
+  width: 500px;
+  height: 500px;
+}
+
+.coffee-break-timer-digit {
+  font-size: 64px;
+}
