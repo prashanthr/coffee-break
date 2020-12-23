@@ -1,10 +1,10 @@
 :root {
   --coffee-break-primary-color: white;
   --coffee-break-secondary-color: #d367c1;
-  --coffee-break-tertiary-color: #00bbcb;
+  --coffee-break-tertiary-color: #363c48; /*#00bbcb;*/
   --coffee-break-error-color: #F7B267;
   --coffee-break-link-color: #ab79d6;
-  --coffee-break-link-hover-color: white;
+  --coffee-break-link-hover-color: #ab79d6;/*white;*/
 }
 
 body {
@@ -34,35 +34,19 @@ body {
   color: white;
 }
 
-.today-web-text-primary {
-  color: var(--today-web-primary-color)
-}
-
-.today-web-text-secondary {
-  color: var(--today-web-secondary-color)
-}
-
-.today-web-text-tertiary {
-  color: var(--today-web-tertiary-color)
-}
-
-.today-web-error-text {
-  color: var(--today-web-error-color)
-}
-
-.today-web-link-text {
-  color: var(--today-web-link-color)
+.coffee-break-error {
+  color: var(--coffee-break-error-color)
 }
 
 a, a:visited, a:-webkit-any-link {
-  color: var(--today-web-link-color);
+  color: var(--coffee-break-link-color);
   text-decoration: none;
 }
 
 a:hover {
-  color: var(--today-web-link-hover-color);
+  color: var(--coffee-break-link-hover-color);
   /* text-decoration: underline; */
-  border-bottom: 1px dashed white;
+  border-bottom: 1px dashed var(--coffee-break-link-hover-color);
 }
 
 .content {
