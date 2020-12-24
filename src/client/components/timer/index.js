@@ -7,35 +7,26 @@ import './index.css'
 const TimerComponent = TimerLibrary.Timer
 const { tick } = TimerLibrary.effects
 
-const Timer = ({ fresh, previousStart, start, className, digitClassName, isPaused, strokeColor, reset, timerRef }) => {
+const Timer = ({ start, className, digitClassName, isPaused, strokeColor, onEnd, onStart }) => {
   const { hour, minute, second } = start
   const [currentTime, setTime] = useState({ hour, minute, second })
-  // useInterval(() => {
-  //   // Your custom logic here
-  //   setTime(tick({ time: currentTime, countdown: true, isPaused, start }))
-  // }, 1000, { previous: previousStart, current: start }, timerRef)
-  console.log('start/currentTime', start, currentTime)
-  // const timer = useRef(null)
   useEffect(() => {
-    console.log('Running main effect', start)
-    if (fresh !== null) {
-      timerRef.current = setTimeout(() => {
-        setTime(tick({ time: currentTime, countdown: true, isPaused }))
-      }, 1000)
-      // Clear timeout if the component is unmounted
-      return () => clearTimeout(timerRef.current)
-    }
+    const timer = setTimeout(() => {
+      setTime(tick({ time: currentTime, countdown: true, isPaused }))
+    }, 1000)
+    // Clear timeout if the component is unmounted
+    return () => clearTimeout(timer)
   })
   useEffect(() => {
+    console.log('start changed')
     setTime(start)
+    onStart()
   }, [start])
-  // useEffect(() => {
-  //   // Clear timeout if start changes
-  //   console.log('clearing timeout because start changed', start)
-  //   if (reset) {
-  //     clearTimeout(timer.current)
-  //   }
-  // })
+  useEffect(() => {
+    if (currentTime.hour === 0 && currentTime.minute === 0 && currentTime.second === 0) {
+      onEnd()
+    }
+  }, [currentTime])
   return (
     <TimerComponent
       type='progress'

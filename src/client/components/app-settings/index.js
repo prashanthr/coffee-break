@@ -1,12 +1,18 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { FormControls } from '@universal-apps/swan-react'
 import './index.css'
 import Button from '../button'
 import { useState } from 'react'
 
-const TimeSetting = ({ hour, minute, second, label, settingKey, onChange, onUpdate }) => {
-  const [state, updateState] = useState({ hour, minute, second })
+const TimeSetting = ({ time, label, settingKey, onChange, onUpdate }) => {
+  const { hour, minute, second } = time
+  const [state, updateState] = useState({ 
+    time: { hour, minute, second } 
+  })
+  useEffect(() => {
+    onUpdate({ key: settingKey, data: state })
+  }, [state])
   return (
     <div className='coffee-break-app-settings-time'>
       {label} 
@@ -15,68 +21,96 @@ const TimeSetting = ({ hour, minute, second, label, settingKey, onChange, onUpda
         name='hour-setting'
         max={59}
         min={0}
-        defaultValue={state.hour}
+        defaultValue={state.time.hour}
         onChange={event => {
           updateState({
             ...state,
-            hour: Number(event.target.value)
+            time: {
+              ...state.time,
+              hour: Number(event.target.value)
+            }
           })
-          if (onChange) {
-            onChange({ key: settingKey, unit: 'hour', event })
-          }
         }}
       />
       &nbsp; 
       <FormControls.NumericInput
-        name='min-setting'
+        name='minute-setting'
         max={59}
         min={0}
-        defaultValue={15}
+        defaultValue={state.time.minute}
         onChange={event => {
           updateState({
             ...state,
-            minute: Number(event.target.value)
+            time: {
+              ...state.time,
+              minute: Number(event.target.value)
+            }
           })
-          if (onChange) {
-            onChange({ key: settingKey, unit: 'minute', event })
-          }
         }}
       /> 
       &nbsp;
       <FormControls.NumericInput
-        name='hour-setting'
+        name='second-setting'
         max={59}
         min={0}
-        defaultValue={0}
+        defaultValue={state.time.second}
         onChange={event => {
           updateState({
             ...state,
-            second: Number(event.target.value)
+            time: {
+              ...state.time,
+              second: Number(event.target.value)
+            }
           })
-          if (onChange) {
-            onChange({ key: settingKey, unit: 'second', event })
-          }
         }}
-      />
-      &nbsp;
-      <Button 
-        className='coffee-break-app-setting-btn-update'
-        name='setting-update'
-        value='Update'
-        onClick={event => onUpdate({ key: settingKey, event, data: state })}
       />
     </div>
   )
 }
 
-const AppSettings = ({ settings, onChange, onUpdate }) => (
-  <div className='coffee-break-app-settings-grid'>
-    <div className='coffee-break-app-settings'>
-      <h2>Settings</h2>
-      <TimeSetting settingKey='focus' hour={settings.focus.hour} minute={settings.focus.minute} second={settings.focus.second} label={'Focus Time'} onChange={onChange} onUpdate={onUpdate} />
-      <TimeSetting settingKey='break' hour={settings.break.hour} minute={settings.break.minute} second={settings.break.second} label={'Break Time'} onChange={onChange} onUpdate={onUpdate} />
+const AppSettings = ({ settings, onChange, onUpdate }) => {
+  const timeSettings = [{
+    settingKey: 'focus',
+    time: settings.focus.time,
+    label: 'Focus Time',
+    onChange: onChange,
+    onUpdate: onUpdate
+  }, {
+    settingKey: 'break',
+    time: settings.break.time,
+    label: 'Break Time',
+    onChange: onChange,
+    onUpdate: onUpdate
+  }]
+  const strokeSettings = [{
+    settingKey: 'focus',
+    strokeColor: settings.focus.strokeColor,
+    onChange: onChange,
+    onUpdate: onUpdate
+  }, {
+    settingKey: 'focus',
+    strokeColor: settings.focus.strokeColor,
+    onChange: onChange,
+    onUpdate: onUpdate
+  }]
+  return (
+    <div className='coffee-break-app-settings-grid'>
+      <div className='coffee-break-app-settings'>
+        <h2>Settings</h2>
+        {timeSettings.map((tSetting,idx) => (
+          <TimeSetting 
+            key={idx}
+            settingKey={tSetting.settingKey}
+            time={tSetting.time}
+            label={tSetting.label}
+            onChange={tSetting.onChange}
+            onUpdate={tSetting.onUpdate}
+          />
+        ))}
+       {}
+      </div>
     </div>
-  </div>
-)
+  )
+}
 
 export default AppSettings
