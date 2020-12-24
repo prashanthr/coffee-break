@@ -8,7 +8,7 @@ const TimerControls = ({ isPaused, inBreak, isDone, onTogglePause, onToggleBreak
     <ButtonGroup
       buttons={[{
         name: 'pause',
-        value: isPaused ? 'Resume' : 'Pause',
+        value: isPaused ? '▶ Resume' : '❚❚ Pause',
         onClick: event => onTogglePause(event)
       }, {
         name: 'take-a-break',
