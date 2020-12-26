@@ -15,8 +15,7 @@ const TimeSetting = ({ time, label, settingKey, onChange, onUpdate }) => {
   }, [state])
   return (
     <div className='coffee-break-app-settings-time'>
-      {label} 
-      &nbsp;&nbsp;
+      <span>{label}</span>
       <FormControls.NumericInput
         name='hour-setting'
         max={59}
@@ -32,7 +31,6 @@ const TimeSetting = ({ time, label, settingKey, onChange, onUpdate }) => {
           })
         }}
       />
-      &nbsp; 
       <FormControls.NumericInput
         name='minute-setting'
         max={59}
@@ -47,8 +45,7 @@ const TimeSetting = ({ time, label, settingKey, onChange, onUpdate }) => {
             }
           })
         }}
-      /> 
-      &nbsp;
+      />
       <FormControls.NumericInput
         name='second-setting'
         max={59}

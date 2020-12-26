@@ -2,11 +2,17 @@
   display: grid;
   grid-template-columns: 2fr 1fr;
   grid-template-rows: 1fr;
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
+  grid-column-gap: 50px;
+  grid-row-gap: 50px;
   margin-left: auto;
   margin-right: auto;
   vertical-align: middle;
+}
+
+@media (max-width: 600px) {
+  .coffee-break-app-container {
+    grid-template-columns: 100%;
+  }
 }
 
 .coffee-break-timer-grid {

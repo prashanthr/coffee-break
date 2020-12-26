@@ -1,6 +1,7 @@
 .coffee-break-timer {
   width: 500px;
   height: 500px;
+  padding-top: 20px;
 }
 
 .coffee-break-timer-digit {

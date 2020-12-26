@@ -3,6 +3,7 @@
   vertical-align: middle;
   margin-left: 20%;
   margin-right: 20%; */
+  font-size: 20px;
   width: 100%;
   margin: 0 auto;
 }
@@ -15,11 +16,18 @@
   grid-row-gap: 0px;
 }
 
-.coffee-break-app-settings-time {
-  display: inline-flex;
+@media (max-width: 600px) {
+  .coffee-break-app-settings-grid {
+    margin-left: 20px;
+  }
 }
 
-.coffee-break-app-setting-btn-update {
-  padding: 0.4em;
-  margin-top: 0.3em;
+.coffee-break-app-settings-grid input {
+  padding: 5px 10px;
+  font-size: 15px;
+}
+
+.coffee-break-app-settings-time {
+  display: inline-grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
 }

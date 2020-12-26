@@ -40,6 +40,13 @@ const App = () => {
     <Layout>
       <div className='coffee-break-app-container'>
         <div className='coffee-break-timer-grid'>
+          <TimerControls 
+            isPaused={isPaused} 
+            isDone={isTimerDone}
+            inBreak={inBreak} 
+            onTogglePause={event => togglePause(!isPaused)} 
+            onToggleBreak={event => toggleBreak(!inBreak)} 
+          />
           <Timer 
             className='coffee-break-timer' 
             digitClassName='coffee-break-timer-digit' 
@@ -48,13 +55,6 @@ const App = () => {
             strokeColor={activeSetting.strokeColor}
             onStart={onStart}
             onEnd={onEnd}
-          />
-          <TimerControls 
-            isPaused={isPaused} 
-            isDone={isTimerDone}
-            inBreak={inBreak} 
-            onTogglePause={event => togglePause(!isPaused)} 
-            onToggleBreak={event => toggleBreak(!inBreak)} 
           />
         </div>
         <AppSettings settings={settings} onUpdate={({ key, property, data }) => {
