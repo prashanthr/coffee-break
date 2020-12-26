@@ -3,8 +3,7 @@ import Layout from '../layout'
 import Timer from '../../components/timer'
 import './index.css'
 import TimerControls from '../../components/timer-controls'
-import AppSettings from '../../components/app-settings';
-import { act } from 'react-dom/test-utils';
+import AppSettings from '../../components/app-settings'
 
 const App = () => {
   const [isPaused, togglePause] = useState(false)
@@ -14,7 +13,7 @@ const App = () => {
     focus: {
       time: {
         hour: 0,
-        minute: 30,
+        minute: 25, // Pomodoro
         second: 0
       },
       strokeColor: '#d367c1'
@@ -22,7 +21,7 @@ const App = () => {
     break: {
       time: {
         hour: 0,
-        minute: 15,
+        minute: 10,
         second: 0
       },
       strokeColor: 'orange'
@@ -60,7 +59,6 @@ const App = () => {
         </div>
         <AppSettings settings={settings} onUpdate={({ key, property, data }) => {
             console.log('update', key, property, data)
-            const current = settings[key]
             updateSettings({
               ...settings,
               [key]: {

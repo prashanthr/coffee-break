@@ -1,7 +1,6 @@
 import React, { Fragment, useState, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import { Timer as TimerLibrary } from '@universal-apps/swan-react'
-import useInterval from '../../effects/use-interval'
 import './index.css'
 
 const TimerComponent = TimerLibrary.Timer

@@ -107,7 +107,6 @@ const AppSettings = ({ settings, onChange, onUpdate }) => {
             onUpdate={tSetting.onUpdate}
           />
         ))}
-       {}
       </div>
     </div>
   )

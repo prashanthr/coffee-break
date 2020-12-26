@@ -1782,7 +1782,7 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
-"@babel/runtime@^7.1.2", "@babel/runtime@^7.12.1":
+"@babel/runtime@^7.1.2", "@babel/runtime@^7.12.1", "@babel/runtime@^7.5.5":
   version "7.12.5"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.12.5.tgz#410e7e487441e1b360c29be715d870d9b985882e"
   integrity sha512-plcc+hbExy3McchJCEQG3knOsuh3HH+Prx1P6cLIkET/0dLuQDEnrT+s27Axgc9bqfsmNUNHfscgMUdBpC9xfg==
@@ -2627,13 +2627,14 @@
     semver "^6.3.0"
     tsutils "^3.17.1"
 
-"@universal-apps/swan-react@^0.0.37":
-  version "0.0.37"
-  resolved "https://registry.yarnpkg.com/@universal-apps/swan-react/-/swan-react-0.0.37.tgz#0934d99b607612b4c53ddf459faf16cd707b62af"
-  integrity sha512-ieWq1kDJrz8Pe4PIVmLy+FNgjZb21ANioazyzgoNFKodfD7ViyXnF4cZLR6RmPGKvEcIan9ATjJUcFYzCpX+kw==
+"@universal-apps/swan-react@^0.0.41":
+  version "0.0.41"
+  resolved "https://registry.yarnpkg.com/@universal-apps/swan-react/-/swan-react-0.0.41.tgz#84872866b2f91a37bc55498b1ee072a01231387f"
+  integrity sha512-ldLsFhqBqxUf241aW2sLiszk2QAzKiJH9i6iyUvBO62sulPkz7la1VEmUGyKfTxsiHGlzuwfJtjSnZEgSNvy3A==
   dependencies:
     react-google-recaptcha "^2.1.0"
     react-google-recaptcha-v3 "^1.5.2"
+    reapop "^3.0.1"
 
 "@webassemblyjs/ast@1.8.5":
   version "1.8.5"
@@ -4921,6 +4922,14 @@ dom-converter@^0.2:
   integrity sha512-gd3ypIPfOMr9h5jIKq8E3sHOTCjeirnl0WK5ZdS1AW0Odt0b1PaWaHdJ4Qk4klv+YB9aJBS7mESXjFoDQPu6DA==
   dependencies:
     utila "~0.4"
+
+dom-helpers@^5.0.1:
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/dom-helpers/-/dom-helpers-5.2.0.tgz#57fd054c5f8f34c52a3eeffdb7e7e93cd357d95b"
+  integrity sha512-Ru5o9+V8CpunKnz5LGgWXkmrH/20cGKwcHwS4m73zIvs54CN9epEmT/HLqFJW3kXpakAFkEdzgy1hzlJe3E4OQ==
+  dependencies:
+    "@babel/runtime" "^7.8.7"
+    csstype "^3.0.2"
 
 dom-serializer@0:
   version "0.2.2"
@@ -10209,9 +10218,9 @@ react-error-overlay@^6.0.7:
   integrity sha512-TAv1KJFh3RhqxNvhzxj6LeT5NWklP6rDr2a0jaTfsZ5wSZWHOGeqQyejUp3xxLfPt2UpyJEcVQB/zyPcmonNFA==
 
 react-google-recaptcha-v3@^1.5.2:
-  version "1.7.0"
-  resolved "https://registry.yarnpkg.com/react-google-recaptcha-v3/-/react-google-recaptcha-v3-1.7.0.tgz#b072464d4237b8f147beaf28fb833264534dc222"
-  integrity sha512-yV7muvRmeD2T0oa6yFfCuVD9caTWqsFGoQBsFryRw+IMgyB2IXNK25NTEt7KYIeloGaJh94GZbB92xFne5HdEw==
+  version "1.7.1"
+  resolved "https://registry.yarnpkg.com/react-google-recaptcha-v3/-/react-google-recaptcha-v3-1.7.1.tgz#e49f81e42b59c04ab9b488b88db3dd6e41e7aa00"
+  integrity sha512-5aCGrSy23rWgxfACxHZ1Mwt+2bnUDoljlm6Xz2gyJS3nGf6vRpVEeY0BjQjAT4C5ujQmvOY7EEpm3bVO8EjH+A==
   dependencies:
     hoist-non-react-statics "3.3.2"
 
@@ -10316,6 +10325,16 @@ react-scripts@3.4.3:
     workbox-webpack-plugin "4.3.1"
   optionalDependencies:
     fsevents "2.1.2"
+
+react-transition-group@4.4.1:
+  version "4.4.1"
+  resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-4.4.1.tgz#63868f9325a38ea5ee9535d828327f85773345c9"
+  integrity sha512-Djqr7OQ2aPUiYurhPalTrVy9ddmFCCzwhqQmtN+J3+3DzLO209Fdr70QrN8Z3DsglWql6iY1lDWAfpFiBtuKGw==
+  dependencies:
+    "@babel/runtime" "^7.5.5"
+    dom-helpers "^5.0.1"
+    loose-envify "^1.4.0"
+    prop-types "^15.6.2"
 
 react@^16.13.0:
   version "16.14.0"
@@ -10428,6 +10447,13 @@ realpath-native@^1.1.0:
   integrity sha512-wlgPA6cCIIg9gKz0fgAPjnzh4yR/LnXovwuo9hvyGvx3h8nX4+/iLZplfUWasXpqD8BdnGnP5njOFjkUwPzvjA==
   dependencies:
     util.promisify "^1.0.0"
+
+reapop@^3.0.1:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/reapop/-/reapop-3.0.2.tgz#b13557ca2569f6ca9cfe233908019be3fb45e8ad"
+  integrity sha512-9vpRYsqY8aENZla6Nw+4HYar3WHysB2vjG3BTZq3pZE0F1RPA2LHmQD4yflo/JIVGsiIbfJknAIRVfXSvjoTCA==
+  dependencies:
+    react-transition-group "4.4.1"
 
 recursive-readdir@2.2.2:
   version "2.2.2"
