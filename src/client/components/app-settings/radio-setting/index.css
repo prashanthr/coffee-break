@@ -1,21 +1,21 @@
-.coffee-break-app-setting-timer-type-grid {
+.coffee-break-app-setting-radio-setting-grid {
   display: inline;
   grid-template-columns: 2fr 2fr;
   padding: 5px 0;
 }
 
-.coffee-break-app-setting-timer-type-radio-input {
+.coffee-break-app-setting-radio-setting-radio-input {
   display: grid;
   grid-auto-flow: column;
   padding-left: 24px;
 }
 @media (max-width: 600px) {
-	.coffee-break-app-setting-timer-type-radio-input {
+	.coffee-break-app-setting-radio-setting-radio-input {
 		padding-left: 105px;
 	}
 }
 
-.coffee-break-app-setting-timer-type-radio-input form {
+.coffee-break-app-setting-radio-setting-radio-input form {
 	max-width: 600px;
 	/* font-family: "Lucida Grande", Tahoma, Verdana, sans-serif; */
 	font-weight: normal;
@@ -24,11 +24,11 @@
   padding: 5px;
 }
 
-.coffee-break-app-setting-timer-type-radio-input {
+.coffee-break-app-setting-radio-setting-radio-input {
   display: inline-grid;
 }
 
-.coffee-break-app-setting-timer-type-radio-input input {
+.coffee-break-app-setting-radio-setting-radio-input input {
 	position: absolute !important;
 	clip: rect(0, 0, 0, 0);
 	height: 1px;
@@ -38,7 +38,7 @@
 }
 
 
-.coffee-break-app-setting-timer-type-radio-input label {
+.coffee-break-app-setting-radio-setting-radio-input label {
 	background-color: var(--coffe-break-background-color); /*#e4e4e4;*/
 	color: var(--coffee-break-primary-color);/*rgba(0, 0, 0, 0.6);*/
 	font-size: 14px;
@@ -51,19 +51,19 @@
 	transition: all 0.1s ease-in-out;
 }
 
-.coffee-break-app-setting-timer-type-radio-input label:hover {
+.coffee-break-app-setting-radio-setting-radio-input label:hover {
 	cursor: pointer;
 }
 
-.coffee-break-app-setting-timer-type-radio-input input:checked + label {
+.coffee-break-app-setting-radio-setting-radio-input > input:checked + label {
 	background-color: #1fd279;
 	box-shadow: none;
 }
 
-.coffee-break-app-setting-timer-type-radio-input label:first-of-type {
+.coffee-break-app-setting-radio-setting-radio-input label:first-of-type {
 	border-radius: 4px 0 0 4px;
 }
 
-.coffee-break-app-setting-timer-type-radio-input label:last-of-type {
+.coffee-break-app-setting-radio-setting-radio-input label:last-of-type {
 	border-radius: 0 4px 4px 0;
 }

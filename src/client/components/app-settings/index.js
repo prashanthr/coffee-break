@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import TimeSetting from './time'
-import TimerTypeSetting from './timer-type'
+import RadioSetting from './radio-setting'
 import ColorPicker from './color-picker'
 import Counter from './counter'
-import './index.css'
 import Energy from './energy'
-
+import './index.css'
 
 const AppSettings = ({ settings, onChange, onUpdate }) => {
   const timeSettings = [{
@@ -36,29 +35,78 @@ const AppSettings = ({ settings, onChange, onUpdate }) => {
     onUpdate: onUpdate
   }]
   const counterSettings = [{
-    label: '☕ Coffee',
+    label: settings.nutrients.coffee.label,
     settingKey: 'nutrients.coffee',
     value: settings.nutrients.coffee.value,
-    onUpdate: onUpdate
+    onUpdate
   }, {
-    label: '💧 Water',
+    label: settings.nutrients.water.label,
     settingKey: 'nutrients.water',
     value: settings.nutrients.water.value,
-    onUpdate: onUpdate
+    onUpdate
+  }, {
+    label: settings.nutrients.food.label,
+    settingKey: 'nutrients.food',
+    value: settings.nutrients.food.value,
+    onUpdate
+  }]
+  const radioSettings = [{
+    label: 'Timer Type',
+    settingKey: 'timer',
+    value: settings.timer.value,
+    choices: [{
+      id: 'timer-progress',
+      value: 'progress',
+      label: 'Progress',
+      isSelected: settings.timer.value === 'progress'
+    }, {
+      id: 'timer-countdown',
+      value: 'countdown',
+      label: 'Countdown',
+      isSelected: settings.timer.value === 'countdown'
+    }],
+    onUpdate
+  }, {
+    label: 'Notifications',
+    settingKey: 'notifications',
+    value: settings.notifications.value,
+    choices: [{
+      id: 'notifications-on',
+      value: true,
+      label: 'On',
+      isSelected: settings.notifications.value === true
+    }, {
+      id: 'notifications-off',
+      value: false,
+      label: 'Off',
+      isSelected: settings.notifications.value === false
+    }],
+    onUpdate: ({ key, data })  => {
+      onUpdate({ 
+        key,
+        data: {
+          ...data,
+          value: data.value === 'true'
+        }
+      })
+    }
   }]
   return (
     <div className='coffee-break-app-settings-grid'>
       <div className='coffee-break-app-settings'>
         <Energy value={settings.energy.value} />
         <h2>Settings</h2>
-        <TimerTypeSetting 
-          settingKey='timer' 
-          label={'Timer Type'}
-          value={settings.timer.type} 
-          onUpdate={onUpdate}
-        />
+        {radioSettings.map((rSetting, idx) => (
+          <RadioSetting 
+            settingKey={rSetting.settingKey}
+            label={rSetting.label}
+            value={rSetting.value} 
+            choices={rSetting.choices}
+            onUpdate={rSetting.onUpdate}
+          />
+        ))}
         {timeSettings.map((tSetting,idx) => (
-          <TimeSetting 
+          <TimeSetting
             key={idx}
             settingKey={tSetting.settingKey}
             time={tSetting.time}

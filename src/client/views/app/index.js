@@ -3,7 +3,7 @@ import Layout from '../layout'
 import Timer from '../../components/timer'
 import TimerControls from '../../components/timer-controls'
 import AppSettings from '../../components/app-settings'
-import { set, get } from 'lodash'
+import { set, get, sample } from 'lodash'
 import './index.css'
 
 const App = () => {
@@ -12,7 +12,10 @@ const App = () => {
   const [isTimerDone, setTimerDone] = useState(false)
   const [settings, updateSettings] = useState({
     timer: {
-      type: 'progress'
+      value: 'progress'
+    },
+    notifications: {
+      value: true
     },
     focus: {
       time: {
@@ -50,9 +53,15 @@ const App = () => {
     },
     nutrients: {
       coffee: {
+        label: '☕ Coffee',
         value: 0
       },
       water: {
+        label: '💧 Water',
+        value: 0
+      },
+      food: {
+        label: `${sample(['🍔','🍕','🍟','🥗','🍜','🍩'])} Food`,
         value: 0
       }
     }
@@ -182,7 +191,7 @@ const App = () => {
             }}
           />
           <Timer
-            type={settings.timer.type}
+            type={settings.timer.value}
             className='coffee-break-timer' 
             digitClassName='coffee-break-timer-digit' 
             isPaused={isPaused}
