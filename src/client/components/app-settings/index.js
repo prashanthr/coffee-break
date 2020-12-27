@@ -51,6 +51,12 @@ const AppSettings = ({ settings, onChange, onUpdate }) => {
       <div className='coffee-break-app-settings'>
         <Energy value={settings.energy.value} />
         <h2>Settings</h2>
+        <TimerTypeSetting 
+          settingKey='timer' 
+          label={'Timer Type'}
+          value={settings.timer.type} 
+          onUpdate={onUpdate}
+        />
         {timeSettings.map((tSetting,idx) => (
           <TimeSetting 
             key={idx}
@@ -61,12 +67,6 @@ const AppSettings = ({ settings, onChange, onUpdate }) => {
             onUpdate={tSetting.onUpdate}
           />
         ))}
-        <TimerTypeSetting 
-          settingKey='timer' 
-          label={'Timer Type'}
-          value={settings.timer.type} 
-          onUpdate={onUpdate}
-        />
         {counterSettings.map((counter, idx) => (
           <Counter
             key={idx}

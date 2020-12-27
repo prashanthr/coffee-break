@@ -9,7 +9,7 @@ const TimerControls = ({ isPaused, inBreak, isDone, onTogglePause, onToggleBreak
       buttons={[{
         name: 'pause',
         value: isDone 
-          ? '↺ Restart'
+          ? '⟲ Restart'
           : (isPaused ? '▶ Resume' : '❚❚ Pause'),
         onClick: event => {
           isDone 
