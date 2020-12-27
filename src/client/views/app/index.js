@@ -35,7 +35,8 @@ const App = () => {
     console.log('timer started')
     setTimerDone(false)
   }
-  const activeSetting = inBreak ? settings.break : settings.focus
+  const activeSettingKey = inBreak ? 'break' : 'focus'
+  const activeSetting = settings[activeSettingKey]
   return (
     <Layout>
       <div className='coffee-break-app-container'>
@@ -46,6 +47,17 @@ const App = () => {
             inBreak={inBreak} 
             onTogglePause={event => togglePause(!isPaused)} 
             onToggleBreak={event => toggleBreak(!inBreak)} 
+            onRestart={event => {
+              updateSettings({
+                ...settings,
+                [activeSettingKey]: {
+                  ...activeSetting,
+                  time: {
+                    ...activeSetting.time
+                  }
+                }
+              })
+            }}
           />
           <Timer 
             className='coffee-break-timer' 
