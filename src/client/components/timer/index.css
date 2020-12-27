@@ -2,6 +2,13 @@
   width: 500px;
   height: 500px;
   padding-top: 20px;
+  margin-left: 10%;
+}
+
+@media (max-width: 600px) {
+  .coffee-break-timer {
+    margin: auto;
+  }
 }
 
 .coffee-break-timer-digit {

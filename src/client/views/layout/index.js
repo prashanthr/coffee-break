@@ -5,6 +5,9 @@ import './index.css'
 const Layout = ({ children }) => (
   <React.Fragment>
     <Logo />
+    <div className='site-heading'>
+      <h2>Coffee Break</h2>
+    </div>
     <div className='content'>
       {children}
     </div>

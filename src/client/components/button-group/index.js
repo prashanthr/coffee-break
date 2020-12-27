@@ -4,7 +4,7 @@ import Button from '../button'
 import './index.css'
 
 const ButtonGroup = ({ buttons, className }) => (
-  <div className={className}>
+  <div className={`coffee-break-button-group ${className}`}>
     {buttons.map((button, idx) => (
       <Button
         key={idx}
@@ -16,5 +16,9 @@ const ButtonGroup = ({ buttons, className }) => (
     ))}
   </div>
 )
+
+ButtonGroup.defaultProps = {
+  className: ''
+}
 
 export default ButtonGroup
