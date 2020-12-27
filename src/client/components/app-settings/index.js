@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
-import TimeSetting from './time-setting'
+import TimeSetting from './time'
+import TimerTypeSetting from './timer-type'
 import ColorPicker from './color-picker'
 import Counter from './counter'
 import './index.css'
@@ -60,6 +61,12 @@ const AppSettings = ({ settings, onChange, onUpdate }) => {
             onUpdate={tSetting.onUpdate}
           />
         ))}
+        <TimerTypeSetting 
+          settingKey='timer' 
+          label={'Timer Type'}
+          value={settings.timer.type} 
+          onUpdate={onUpdate}
+        />
         {counterSettings.map((counter, idx) => (
           <Counter
             key={idx}

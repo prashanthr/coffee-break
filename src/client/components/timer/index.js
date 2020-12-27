@@ -6,9 +6,14 @@ import './index.css'
 const TimerComponent = TimerLibrary.Timer
 const { tick } = TimerLibrary.effects
 
-const Timer = ({ start, className, digitClassName, isPaused, strokeColor, onEnd, onStart }) => {
+const Timer = ({ type, start, className, digitClassName, isPaused, strokeColor, onEnd, onStart }) => {
   const { hour, minute, second } = start
   const [currentTime, setTime] = useState({ hour, minute, second })
+  const additionalDigitClassName = (
+    type === 'progress' 
+    ? '' 
+    : 'coffee-break-timer-digit-countdown'
+  )
   useEffect(() => {
     const timer = setTimeout(() => {
       setTime(tick({ time: currentTime, countdown: true, isPaused }))
@@ -28,9 +33,9 @@ const Timer = ({ start, className, digitClassName, isPaused, strokeColor, onEnd,
   }, [currentTime])
   return (
     <TimerComponent
-      type='progress'
+      type={type}
       className={className} 
-      digitClassName={digitClassName} 
+      digitClassName={`${digitClassName} ${additionalDigitClassName}`}
       start={start} 
       currentTime={currentTime} 
       isPaused={isPaused}
@@ -39,6 +44,8 @@ const Timer = ({ start, className, digitClassName, isPaused, strokeColor, onEnd,
 }
 
 Timer.defaultProps = {
+  className: '',
+  type: 'progress',
   isPaused: false,
   strokeColor: '#d367c1',
   reset: false,

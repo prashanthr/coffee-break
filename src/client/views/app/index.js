@@ -11,6 +11,9 @@ const App = () => {
   const [inBreak, toggleBreak] = useState(false)
   const [isTimerDone, setTimerDone] = useState(false)
   const [settings, updateSettings] = useState({
+    timer: {
+      type: 'progress'
+    },
     focus: {
       time: {
         hour: 0,
@@ -72,7 +75,8 @@ const App = () => {
               })
             }}
           />
-          <Timer 
+          <Timer
+            type={settings.timer.type}
             className='coffee-break-timer' 
             digitClassName='coffee-break-timer-digit' 
             isPaused={isPaused}
@@ -82,7 +86,9 @@ const App = () => {
             onEnd={onEnd}
           />
         </div>
-        <AppSettings settings={settings} onUpdate={({ key, property, data }) => {
+        <AppSettings 
+          settings={settings} 
+          onUpdate={({ key, property, data }) => {
             console.log('update', key, property, data)
             updateSettings({
               ...settings,
