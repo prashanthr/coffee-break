@@ -1,6 +1,6 @@
 .coffee-break-app-setting-timer-type-grid {
-  /* display: grid; */
-  grid-template-columns: 2fr 1fr 1fr 1fr;
+  display: inline;
+  grid-template-columns: 2fr 2fr;
   padding: 5px 0;
 }
 
@@ -8,6 +8,11 @@
   display: grid;
   grid-auto-flow: column;
   padding-left: 24px;
+}
+@media (max-width: 600px) {
+	.coffee-break-app-setting-timer-type-radio-input {
+		padding-left: 105px;
+	}
 }
 
 .coffee-break-app-setting-timer-type-radio-input form {
@@ -20,7 +25,7 @@
 }
 
 .coffee-break-app-setting-timer-type-radio-input {
-  display: inline-block;
+  display: inline-grid;
 }
 
 .coffee-break-app-setting-timer-type-radio-input input {
