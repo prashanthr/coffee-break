@@ -25,6 +25,12 @@ const App = () => {
         second: 0
       },
       strokeColor: 'orange'
+    },
+    coffee: {
+      value: 0
+    },
+    water: {
+      value: 0
     }
   })
   const onEnd = () => {

@@ -2,7 +2,9 @@ import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import TimeSetting from './time-setting'
 import ColorPicker from './color-picker'
+import Counter from './counter'
 import './index.css'
+
 
 const AppSettings = ({ settings, onChange, onUpdate }) => {
   const timeSettings = [{
@@ -31,6 +33,17 @@ const AppSettings = ({ settings, onChange, onUpdate }) => {
     onChange: onChange,
     onUpdate: onUpdate
   }]
+  const counterSettings = [{
+    label: '☕ Coffee',
+    settingKey: 'coffee',
+    value: settings.coffee.value,
+    onUpdate: onUpdate
+  }, {
+    label: '💧 Water',
+    settingKey: 'water',
+    value: settings.water.value,
+    onUpdate: onUpdate
+  }]
   return (
     <div className='coffee-break-app-settings-grid'>
       <div className='coffee-break-app-settings'>
@@ -43,6 +56,15 @@ const AppSettings = ({ settings, onChange, onUpdate }) => {
             label={tSetting.label}
             onChange={tSetting.onChange}
             onUpdate={tSetting.onUpdate}
+          />
+        ))}
+        {counterSettings.map((counter, idx) => (
+          <Counter
+            key={idx}
+            settingKey={counter.settingKey}
+            label={counter.label}
+            value={counter.value}
+            onUpdate={counter.onUpdate}
           />
         ))}
         {strokeSettings.map((cSetting, idx) => (

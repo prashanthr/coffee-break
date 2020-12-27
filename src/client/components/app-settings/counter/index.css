@@ -1,0 +1,9 @@
+.coffee-break-app-settings-counter {
+  display: inline-grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+}
+
+.coffee-break-app-settings-counter-value {
+  text-align: center;
+}
+

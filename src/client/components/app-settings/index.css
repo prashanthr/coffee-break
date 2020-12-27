@@ -13,12 +13,16 @@
   grid-template-columns: 1fr;
   grid-template-rows: 1fr;
   grid-column-gap: 0px;
-  grid-row-gap: 0px;
+  grid-row-gap: 5px;
 }
 
 @media (max-width: 600px) {
   .coffee-break-app-settings-grid {
-    margin-left: 20px;
+    /* margin-left: 20px;
+    margin-right: 20px; */
+    margin: auto;
+    padding-left: 10px;
+    padding-right: 10px;
   }
 }
 
