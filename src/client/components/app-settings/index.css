@@ -27,6 +27,8 @@
 }
 
 .coffee-break-app-settings-grid input {
+  background: var(--coffe-break-background-color);
+  color: var(--coffee-break-primary-color);
   padding: 5px 10px;
   font-size: 15px;
 }
