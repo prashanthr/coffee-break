@@ -4,11 +4,13 @@ import './index.css'
 
 const Energy = ({ value, label }) => {
   let computedValue = value/100
-  let className = computedValue > 0.5
+  let className = computedValue > 0.7
     ? '' 
-    : computedValue > 0.25
+    : computedValue > 0.5
       ? 'coffee-break-energy-progress-wrap-50'
-      : 'coffee-break-energy-progress-wrap-25'
+      : computedValue > 0.25
+        ? 'coffee-break-energy-progress-wrap-25'
+        : 'coffee-break-energy-progress-wrap-0'
   return (
     <div className='coffee-break-energy-grid'>
       <span>{label}</span>

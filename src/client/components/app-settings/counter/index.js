@@ -5,10 +5,11 @@ import './index.css'
 
 const Counter = ({ label, settingKey, value, onUpdate }) => {
   const [state, updateState] = useState({
-    value
+    value,
+    lastAction: null
   })
   useEffect(() => {
-    onUpdate({ key: settingKey, data: state })
+    onUpdate({ key: settingKey, property: state.lastAction, data: state })
   }, [state])
   return (
     <div className='coffee-break-app-settings-counter'>
@@ -17,7 +18,8 @@ const Counter = ({ label, settingKey, value, onUpdate }) => {
         value={'-'}
         onClick={event => updateState({
             ...state,
-            value: state.value - 1
+            value: state.value - 1,
+            lastAction: 'decrement'
           })
         }
       />
@@ -26,7 +28,8 @@ const Counter = ({ label, settingKey, value, onUpdate }) => {
         value={'+'}
         onClick={event => updateState({
             ...state,
-            value: state.value + 1
+            value: state.value + 1,
+            lastAction: 'increment'
           })
         }
       />

@@ -6,9 +6,10 @@ import './index.css'
 const TimerComponent = TimerLibrary.Timer
 const { tick } = TimerLibrary.effects
 
-const Timer = ({ type, start, className, digitClassName, isPaused, strokeColor, onEnd, onStart }) => {
+const Timer = ({ elapsed, type, start, className, digitClassName, isPaused, strokeColor, onEnd, onStart, onTick, onPomodoroComplete }) => {
   const { hour, minute, second } = start
   const [currentTime, setTime] = useState({ hour, minute, second })
+  const [elapsedTime, setElapsedTime] = useState(elapsed)
   const additionalDigitClassName = (
     type === 'progress' 
     ? '' 
@@ -17,6 +18,8 @@ const Timer = ({ type, start, className, digitClassName, isPaused, strokeColor, 
   useEffect(() => {
     const timer = setTimeout(() => {
       setTime(tick({ time: currentTime, countdown: true, isPaused }))
+      setElapsedTime(tick({ time: elapsedTime, countdown: false, isPaused }))
+      onTick({ time: elapsedTime })
     }, 1000)
     // Clear timeout if the component is unmounted
     return () => clearTimeout(timer)
@@ -31,6 +34,12 @@ const Timer = ({ type, start, className, digitClassName, isPaused, strokeColor, 
       onEnd()
     }
   }, [currentTime])
+  useEffect(() => {
+    if (elapsedTime.minute > 0 && elapsedTime.minute % 25 === 0) {
+      console.log('pomo', elapsedTime)
+      onPomodoroComplete({ time: elapsedTime })
+    }
+  }, [elapsedTime])
   return (
     <TimerComponent
       type={type}

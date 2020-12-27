@@ -55,7 +55,10 @@ progress::-moz-progress-bar {
 }
 
 .coffee-break-energy-progress-wrap-25 progress::-webkit-progress-value {
-  background: #e26049;
+  background: #e8e965;
 }
 
+.coffee-break-energy-progress-wrap-0 progress::-webkit-progress-value {
+  background: #e26049;
+}
 
