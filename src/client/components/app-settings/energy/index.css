@@ -1,0 +1,61 @@
+.coffee-break-energy-grid {
+  display: inline-grid;
+  grid-template-columns: 100%;
+  grid-row-gap: 5px;
+  font-size: 24px;
+}
+
+.coffee-break-energy-progress-wrap {
+  
+
+}
+
+.coffee-break-energy-progress-wrap progress {
+  border: none;
+  /* background: red; */
+  /* width: 400px;
+  height: 60px; */
+  /* background: crimson; */
+}
+
+.coffee-break-energy-progress-wrap progress::-webkit-progress-value {
+  background: #1fd279;
+}
+
+.coffee-break-energy-progress-wrap progress::-webkit-progress-bar {
+  background: #282c35;
+}
+
+/* progress {
+  color: lightblue;
+}
+
+progress::-webkit-progress-value {
+  background: lightblue;
+}
+
+progress::-moz-progress-bar {
+  background: lightcolor;
+} */
+
+/* progress::-webkit-progress-value {
+  background: red;
+} */
+
+/* progress::-webkit-progress-bar {
+  background: blue;
+} */
+
+.coffee-break-energy-progress {
+  
+}
+
+.coffee-break-energy-progress-wrap-50 progress::-webkit-progress-value {
+  background: #f7a311;
+}
+
+.coffee-break-energy-progress-wrap-25 progress::-webkit-progress-value {
+  background: #e26049;
+}
+
+

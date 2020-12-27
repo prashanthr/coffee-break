@@ -18,7 +18,7 @@ const TimerControls = ({ isPaused, inBreak, isDone, onTogglePause, onToggleBreak
         }
       }, {
         name: 'take-a-break',
-        value: inBreak? 'Start Working' : 'Take a break',
+        value: inBreak? 'Start Focusing' : 'Take a break',
         onClick: event => onToggleBreak(event)
       }]}
     />

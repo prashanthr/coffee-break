@@ -1,9 +1,10 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Layout from '../layout'
 import Timer from '../../components/timer'
-import './index.css'
 import TimerControls from '../../components/timer-controls'
 import AppSettings from '../../components/app-settings'
+import { set, get } from 'lodash'
+import './index.css'
 
 const App = () => {
   const [isPaused, togglePause] = useState(false)
@@ -26,13 +27,19 @@ const App = () => {
       },
       strokeColor: 'orange'
     },
-    coffee: {
-      value: 0
+    energy: {
+      value: 100
     },
-    water: {
-      value: 0
+    nutrients: {
+      coffee: {
+        value: 0
+      },
+      water: {
+        value: 0
+      }
     }
   })
+  console.log('set', settings)
   const onEnd = () => {
     console.log('timer is done')
     setTimerDone(true)
@@ -79,11 +86,18 @@ const App = () => {
             console.log('update', key, property, data)
             updateSettings({
               ...settings,
-              [key]: {
-                ...settings[key],
+              ...set(settings, key, {
+                ...get(settings, key),
                 ...data
-              },
+              })
             })
+            // updateSettings({
+            //   ...settings,
+            //   [key]: {
+            //     ...settings[key],
+            //     ...data
+            //   },
+            // })
           }
         } />
       </div>

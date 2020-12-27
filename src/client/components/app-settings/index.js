@@ -4,6 +4,7 @@ import TimeSetting from './time-setting'
 import ColorPicker from './color-picker'
 import Counter from './counter'
 import './index.css'
+import Energy from './energy'
 
 
 const AppSettings = ({ settings, onChange, onUpdate }) => {
@@ -35,18 +36,19 @@ const AppSettings = ({ settings, onChange, onUpdate }) => {
   }]
   const counterSettings = [{
     label: '☕ Coffee',
-    settingKey: 'coffee',
-    value: settings.coffee.value,
+    settingKey: 'nutrients.coffee',
+    value: settings.nutrients.coffee.value,
     onUpdate: onUpdate
   }, {
     label: '💧 Water',
-    settingKey: 'water',
-    value: settings.water.value,
+    settingKey: 'nutrients.water',
+    value: settings.nutrients.water.value,
     onUpdate: onUpdate
   }]
   return (
     <div className='coffee-break-app-settings-grid'>
       <div className='coffee-break-app-settings'>
+        <Energy value={settings.energy.value} />
         <h2>Settings</h2>
         {timeSettings.map((tSetting,idx) => (
           <TimeSetting 
