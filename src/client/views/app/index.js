@@ -15,7 +15,8 @@ import {
   notifyNutrientReminder,
   notifyOnEnergyBoost,
   notifyOnEnergyDrain,
-  notifyNutrientOverload
+  notifyNutrientOverload,
+  notifyNutrientGain
 } from '../../components/notification/payloads'
 import './index.css'
 
@@ -100,7 +101,7 @@ const App = () => {
   const onPauseChange = (event) => {
     togglePause(!isPaused)
     notify(isPaused 
-      ? notifyOnResume 
+      ? notifyOnResume()
       : notifyOnPaused({ 
           // onDismiss: () => togglePause(!isPaused),
           // onPrimaryClick: () => {
@@ -128,7 +129,7 @@ const App = () => {
           notify(notifyOnEnergyBoost)
           return Math.min(currentValue + factor, max)
         case 'decrement':
-          notify(notifyOnEnergyDrain)
+          notify(notifyOnEnergyDrain())
           return Math.max(currentValue - factor, min)
         default:
           return currentValue
@@ -210,6 +211,7 @@ const App = () => {
           ),
           action: settings.energy.value <= 98 ? 'increment' : null
         })
+        notify(notifyNutrientGain())
         return
       case 'decrement':
         updateEnergy({

@@ -9,11 +9,17 @@ export const notifyOnWelcome = ({
 })
 
 export const notifyOnPaused = ({ onDismiss, onPrimaryClick }) => ({
-  title: 'Timer Paused. Go slay dragons',
+  title: sample([
+    'Timer Paused. Go slay dragons 🐉',
+    `I'll keep watch while you're gone 👀`,
+    `Go find your peace ☮️. Return with zen`,
+    `Medidate. Play. Sleep. Come back refreshed! 🧘‍♂️`,
+    `Grab a drink. Cheers 🍻`
+  ]),
   status: statuses.info,
   dismissible: true,
   showDismissButton: true,
-  dismissAfter: 2500,
+  dismissAfter: 5000,
   // onDismiss,
   // buttons: [{
   //   name: 'Resume',
@@ -22,11 +28,16 @@ export const notifyOnPaused = ({ onDismiss, onPrimaryClick }) => ({
   // }],
 })
 
-export const notifyOnResume = ({
-  title: 'Welcome back, master',
-  status: statuses.info,
+export const notifyOnResume = () => ({
+  title: sample([
+    'Welcome back, your excellency 🤴',
+    'Hello again, old friend 👋',
+    'Good to see you again mate',
+    `Ah, you've returned from your quest. Let us begin`
+  ]),
+  status: statuses.none,
   dismissible: true,
-  dismissAfter: 2000
+  dismissAfter: 3000
 })
 
 
@@ -45,10 +56,17 @@ export const notifyOnBreak = ({
 })
 
 export const notifyOnPomodoro = ({
-  title: 'Congrats! You just completed a pomodoro cycle',
+  title: 'Congrats! You just completed a pomodoro cycle 🏅',
   status: statuses.success,
   dismissible: true,
   dismissAfter: 2000
+})
+
+export const notifyNutrientGain = () => ({
+  title: `${sample(['Aah that was refreshing', 'Thanks. I needed that.', 'Recharged.'])}`,
+  status: statuses.none,
+  dismissible: true,
+  dismissAfter: 2500
 })
 
 export const notifyNutrientReminder = () => ({
@@ -66,14 +84,18 @@ export const notifyNutrientOverload = ({ nutrient }) => ({
 
 export const notifyOnEnergyBoost = ({
   title: 'You just leveled up. Nice ⚡️',
-  status: statuses.info,
+  status: statuses.success,
   dismissible: true,
   dismissAfter: 2000
 })
 
-export const notifyOnEnergyDrain = ({
-  title: `Whoa. Is it just me or are you feeling a little light headed? 😵`,
-  status: statuses.info,
+export const notifyOnEnergyDrain = () => ({
+  title: `${sample([
+    'Whoa. Is it just me or are you feeling a little light headed? 😵',
+    `Are you okay?`,
+    `I don't feel so good`
+  ])}`,
+  status: statuses.warning,
   dismissible: true,
   dismissAfter: 2000 
 })
