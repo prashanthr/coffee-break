@@ -11,7 +11,8 @@ import NotificationsSystem, {
   STATUSES,
   FadeTransition,
   GrowTransition,
-  SlideTransition
+  SlideTransition,
+  POSITIONS
 } from 'reapop'
 
 const themes = {
@@ -32,6 +33,10 @@ const statuses = {
   ...STATUSES
 }
 
+const positions = {
+  ...POSITIONS
+}
+
 const transitions = {
   FadeTransition,
   GrowTransition,
@@ -43,7 +48,7 @@ const AppNotificationsWrapper = ({ children }) => {
   const { notifications, dismissNotification } = effects.useNotifications()
   effects.setUpNotifications({
     defaultProps: {
-        position: 'top-right',
+        position: positions.topRight,
         dismissible: true,
         showDismissButton: true,
         onAdd: () => console.log('Notification added'),
@@ -73,6 +78,7 @@ export {
   AppNotificationsWrapper,
   effects,
   statuses,
+  positions,
   themes,
   transitions
 }

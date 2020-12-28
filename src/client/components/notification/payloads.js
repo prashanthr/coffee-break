@@ -1,4 +1,4 @@
-import { statuses } from './index'
+import { statuses, positions } from './index'
 import { sample } from 'lodash'
 const setIntroShown = () => {
   const item = window.localStorage.getItem('intro-seen')
@@ -114,6 +114,7 @@ export const notifyOnPomodoro = ({
 
 export const notifyNutrientGain = () => ({
   title: `${sample(['Aah that was refreshing', 'Thanks. I needed that.', 'Recharged.'])}`,
+  position: positions.bottomRight,
   status: statuses.none,
   dismissible: true,
   dismissAfter: 2500
@@ -121,12 +122,14 @@ export const notifyNutrientGain = () => ({
 
 export const notifyNutrientReminder = () => ({
   title: `Don't forget to ${sample(['drink 💧', 'have a cup of ☕️', 'eat 🥗'])}`,
+  position: positions.bottomRight,
   status: statuses.info,
   dismissible: true
 })
 
 export const notifyNutrientOverload = ({ nutrient }) => ({
   title: `Whoa. Easy there with the ${nutrient} buddy! Don't overdo it.`,
+  position: positions.bottomRight,
   status: statuses.warning,
   dismissible: true,
   dismissAfter: 3000
@@ -134,6 +137,7 @@ export const notifyNutrientOverload = ({ nutrient }) => ({
 
 export const notifyOnEnergyBoost = ({
   title: 'You just leveled up. Nice ⚡️',
+  position: positions.bottomRight,
   status: statuses.success,
   dismissible: true,
   dismissAfter: 2000
@@ -145,6 +149,7 @@ export const notifyOnEnergyDrain = () => ({
     `Are you okay?`,
     `I don't feel so good`
   ])}`,
+  postion: positions.bottomRight,
   status: statuses.warning,
   dismissible: true,
   dismissAfter: 2000 
