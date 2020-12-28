@@ -8,7 +8,6 @@ import Energy from './energy'
 import Button from '../button'
 import './index.css'
 
-
 const AppSettings = ({ settings, onChange, onUpdate, onDisplayIntroNotifications }) => {
   const timeSettings = [{
     settingKey: 'focus',
@@ -110,7 +109,7 @@ const AppSettings = ({ settings, onChange, onUpdate, onDisplayIntroNotifications
     }
   }]
   return (
-    <div className='coffee-break-app-settings-grid'>
+    <div className='animate__animated animate__fadeInRight coffee-break-app-settings-grid'>
       <div className='coffee-break-app-settings'>
         <Energy value={settings.energy.value} />
         <h2>Settings</h2>

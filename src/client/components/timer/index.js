@@ -47,7 +47,7 @@ const Timer = ({ elapsed, type, start, className, digitClassName, isPaused, stro
   return (
     <TimerComponent
       type={type}
-      className={className} 
+      className={`animate__animated animate__fadeInUpBig ${className}`} 
       digitClassName={`${digitClassName} ${additionalDigitClassName}`}
       start={start} 
       currentTime={currentTime} 
