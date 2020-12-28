@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Timer as TimerLibrary } from '@universal-apps/swan-react'
 import './index.css'
@@ -57,12 +57,23 @@ Timer.defaultProps = {
   type: 'progress',
   isPaused: false,
   strokeColor: '#d367c1',
-  reset: false,
   start: {
     hour: 0,
     minute: 15,
     second: 0
   }
+}
+
+Timer.propTypes = {
+  className: PropTypes.string,
+  type: PropTypes.string,
+  isPaused: PropTypes.bool,
+  strokeColor: PropTypes.string,
+  start: PropTypes.shape({
+    hour: PropTypes.number,
+    minute: PropTypes.number,
+    second: PropTypes.number
+  })
 }
 
 export default Timer

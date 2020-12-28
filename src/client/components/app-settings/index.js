@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import TimeSetting from './time'
 import RadioSetting from './radio-setting'
@@ -160,6 +160,74 @@ const AppSettings = ({ settings, onChange, onUpdate, onDisplayIntroNotifications
       </div>
     </div>
   )
+}
+
+AppSettings.propTypes = {
+  settings: PropTypes.shape({
+    timer: {
+      value: PropTypes.string
+    },
+    notifications: {
+      value: PropTypes.bool
+    },
+    focus: PropTypes.shape({
+      time: PropTypes.shape({
+        hour: PropTypes.number,
+        minute: PropTypes.number,
+        second: PropTypes.number
+      }),
+      elapsed: PropTypes.shape({
+        time: PropTypes.shape({
+          hour: PropTypes.number,
+          minute: PropTypes.number,
+          second: PropTypes.number
+        }),
+        pomodoros: PropTypes.number
+      }),
+      strokeColor: PropTypes.string
+    }),
+    break: PropTypes.shape({
+      time: PropTypes.shape({
+        hour: PropTypes.number,
+        minute: PropTypes.number,
+        second: PropTypes.number
+      }),
+      elapsed: PropTypes.shape({
+        time: PropTypes.shape({
+          hour: PropTypes.number,
+          minute: PropTypes.number,
+          second: PropTypes.number
+        }),
+      }),
+      strokeColor: PropTypes.string
+    }),
+    energy: PropTypes.shape({
+      value: PropTypes.number
+    }),
+    nutrients: PropTypes.shape({
+      coffee: PropTypes.shape({
+        value: PropTypes.number,
+        max: PropTypes.number,
+        label: PropTypes.string,
+        notify: PropTypes.bool
+      }),
+      water: PropTypes.shape({
+        value: PropTypes.number,
+        max: PropTypes.number,
+        label: PropTypes.string,
+        notify: PropTypes.bool
+      }),
+      food: PropTypes.shape({
+        value: PropTypes.number,
+        max: PropTypes.number,
+        label: PropTypes.string,
+        notify: PropTypes.bool
+      })
+    })
+  }),
+  onUpdate: PropTypes.func,
+  onChange: PropTypes.func,
+  onDisplayIntroNotifications: PropTypes.func
 }
 
 export default AppSettings

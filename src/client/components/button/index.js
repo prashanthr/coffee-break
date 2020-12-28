@@ -13,4 +13,11 @@ const Button = ({ className, name, value, onClick }) => (
   />
 )
 
+Button.propTypes = {
+  className: PropTypes.string,
+  name: PropTypes.string,
+  value: PropTypes.any,
+  onClick: PropTypes.func
+}
+
 export default Button

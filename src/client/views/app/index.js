@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Layout from '../layout'
 import Timer from '../../components/timer'
 import TimerControls from '../../components/timer-controls'
@@ -8,8 +8,7 @@ import { effects } from '../../components/notification'
 import { 
   introNotifications,
   notifyOnPaused, 
-  notifyOnResume, 
-  notifyOnWelcome,
+  notifyOnResume,
   notifyOnPomodoro,
   notifyOnBreak,
   notifyOnFocus,
@@ -30,7 +29,7 @@ const displayIntroNotifications = ({ notifyFunc }) => {
 }
 
 const App = () => {
-  const { notify, notifications, dismissNotification } = effects.useNotifications()
+  const { notify } = effects.useNotifications()
   useEffect(() => {
     displayIntroNotifications({ notifyFunc: notify })
   }, [])
@@ -235,6 +234,8 @@ const App = () => {
           ),
           action: settings.energy.value > 2 ? 'decrement' : null
         })
+        return
+      default:
         return
     }
   }

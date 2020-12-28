@@ -37,7 +37,10 @@ const Counter = ({ label, settingKey, value, onUpdate }) => {
   )
 }
 Counter.propTypes = {
-
+  label: PropTypes.string,
+  settingKey: PropTypes.string,
+  value: PropTypes.number,
+  onUpdate: PropTypes.func
 }
 
 Counter.defaultProps = {

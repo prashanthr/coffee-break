@@ -25,4 +25,13 @@ const TimerControls = ({ isPaused, inBreak, isDone, onTogglePause, onToggleBreak
   </div>
 )
 
+TimerControls.propTypes = {
+  isPaused: PropTypes.bool,
+  inBreak: PropTypes.bool,
+  isDone: PropTypes.bool,
+  onTogglePause: PropTypes.func,
+  onToggleBreak: PropTypes.func,
+  onRestart: PropTypes.func
+}
+
 export default TimerControls

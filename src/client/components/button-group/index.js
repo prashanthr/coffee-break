@@ -17,6 +17,16 @@ const ButtonGroup = ({ buttons, className }) => (
   </div>
 )
 
+ButtonGroup.propTypes = {
+  className: PropTypes.string,
+  buttons: PropTypes.arrayOf(PropTypes.shape({
+    className: PropTypes.string,
+    name: PropTypes.string,
+    value: PropTypes.any,
+    onClick: PropTypes.func
+  }))
+}
+
 ButtonGroup.defaultProps = {
   className: ''
 }
