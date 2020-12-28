@@ -110,13 +110,7 @@ const App = () => {
     togglePause(!isPaused)
     notify(isPaused 
       ? notifyOnResume()
-      : notifyOnPaused({ 
-          // onDismiss: () => togglePause(!isPaused),
-          // onPrimaryClick: () => {
-          //     console.log('isp pri')
-          //     togglePause(!isPaused)
-          //   }
-          })
+      : notifyOnPaused({})
     )
   }
   const onBreakChange = (event) => {
