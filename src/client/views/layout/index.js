@@ -6,7 +6,7 @@ const Layout = ({ children }) => (
   <React.Fragment>
     <Logo />
     <div className='site-heading'>
-      <h2>Coffee Break</h2>
+      <h1>Coffee Break</h1>
     </div>
     <div className='content'>
       {children}
