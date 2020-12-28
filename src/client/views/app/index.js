@@ -4,9 +4,33 @@ import Timer from '../../components/timer'
 import TimerControls from '../../components/timer-controls'
 import AppSettings from '../../components/app-settings'
 import { set, get, sample } from 'lodash'
+import { effects } from '../../components/notification'
+import { 
+  notifyOnPaused, 
+  notifyOnResume, 
+  notifyOnWelcome,
+  notifyOnPomodoro,
+  notifyOnBreak,
+  notifyOnFocus,
+  notifyNutrientReminder,
+  notifyOnEnergyBoost,
+  notifyOnEnergyDrain,
+  notifyNutrientOverload
+} from '../../components/notification/payloads'
 import './index.css'
 
 const App = () => {
+  const { notify, notifications, dismissNotification } = effects.useNotifications()
+  useEffect(() => {
+    notify(notifyOnWelcome)
+  }, [])
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      notify(notifyNutrientReminder())
+    }, 3600000)
+    // Clear timeout if the component is unmounted
+    return () => clearTimeout(timer)
+  })
   const [isPaused, togglePause] = useState(false)
   const [inBreak, toggleBreak] = useState(false)
   const [isTimerDone, setTimerDone] = useState(false)
@@ -54,7 +78,9 @@ const App = () => {
     nutrients: {
       coffee: {
         label: '☕ Coffee',
-        value: 0
+        max: 3,
+        value: 0,
+        notify: true
       },
       water: {
         label: '💧 Water',
@@ -62,13 +88,35 @@ const App = () => {
       },
       food: {
         label: `${sample(['🍔','🍕','🍟','🥗','🍜','🍩'])} Food`,
-        value: 0
+        value: 0,
+        max: 3,
+        notify: true
       }
     }
   })
   const activeSettingKey = inBreak ? 'break' : 'focus'
   const activeSetting = settings[activeSettingKey]
   console.log('set', settings)
+  const onPauseChange = (event) => {
+    togglePause(!isPaused)
+    notify(isPaused 
+      ? notifyOnResume 
+      : notifyOnPaused({ 
+          // onDismiss: () => togglePause(!isPaused),
+          // onPrimaryClick: () => {
+          //     console.log('isp pri')
+          //     togglePause(!isPaused)
+          //   }
+          })
+    )
+  }
+  const onBreakChange = (event) => {
+    if (inBreak) {
+      updateEnergy({ factor: 5, action: 'increment' })
+    }
+    toggleBreak(!inBreak)
+    notify(inBreak ? notifyOnFocus : notifyOnBreak)
+  }
   const updateEnergy = ({ factor, action }) => {
     console.log('Updating energy', factor, action)
     const getValue = () => {
@@ -77,9 +125,13 @@ const App = () => {
       const min = 0
       switch(action) {
         case 'increment':
+          notify(notifyOnEnergyBoost)
           return Math.min(currentValue + factor, max)
         case 'decrement':
+          notify(notifyOnEnergyDrain)
           return Math.max(currentValue - factor, min)
+        default:
+          return currentValue
       }
     }
     updateSettings({
@@ -111,52 +163,66 @@ const App = () => {
       })
   }
   const onPomodoroComplete = ({ time }) => {
-    console.log('Pomodoro Complete at', time)
-    updateSettings({
-      ...settings,
-      energy: {
-        ...settings.energy,
-        value: settings.energy.value > 2 
-          ? settings.energy.value > 30 
-            ? settings.energy.value - 10
-            : settings.energy.value > 10
-              ? settings.energy.value - 5
-              : settings.energy.value - 2
-          : settings.energy.value
-      }
-    })
+    console.log('Pomodoro Complete at', time, 'inBreak', inBreak)
+    if (!inBreak) { 
+      notify(notifyOnPomodoro)
+      updateSettings({
+        ...settings,
+        focus: {
+          ...settings.focus,
+          elapsed: {
+            ...settings.focus.elapsed,
+            pomodoros: settings.focus.elapsed.pomodoros + 1
+          }
+        }
+      })
+      updateEnergy({
+        factor: (
+          settings.energy.value > 2 
+            ? settings.energy.value > 30 
+              ? 10
+              : settings.energy.value > 10
+                ? 5
+                : 2
+            : 0
+        ),
+        action: settings.energy.value > 2 ? 'decrement' : null
+      })
+    }
   }
   const onNutrientUpdate = ({ nutrient, property }) => {
     console.log('onNutrientUpdate', nutrient, property)
+    const nutrientInQuestion = settings.nutrients[nutrient]
+    if (nutrientInQuestion.notify && nutrientInQuestion.value > nutrientInQuestion.max) {
+      notify(notifyNutrientOverload({ nutrient: nutrientInQuestion.label }))
+    }
     switch (property) {
       case 'increment':
-        updateSettings({
-          ...settings,
-          energy: {
-            ...settings.energy,
-            value: settings.energy.value <= 98 
+        updateEnergy({
+          factor: (
+            settings.energy.value <= 98 
               ? settings.energy.value >= 70 
-                ? settings.energy.value + 5
+                ? 5
                 : settings.energy.value > 50
-                  ? settings.energy.value + 10
-                  : settings.energy.value + 20
-              : 100
-          }
+                  ? 10
+                  : 20
+              : 0
+          ),
+          action: settings.energy.value <= 98 ? 'increment' : null
         })
         return
       case 'decrement':
-        updateSettings({
-          ...settings,
-          energy: {
-            ...settings.energy,
-            value: settings.energy.value > 2 
-              ? settings.energy.value > 50 
-                ? settings.energy.value - 10
-                : settings.energy.value > 30
-                  ? settings.energy.value - 5
-                  : settings.energy.value - 5
-              : settings.energy.value
-          }
+        updateEnergy({
+          factor: (
+            settings.energy.value > 2 
+            ? settings.energy.value > 50 
+              ? 10
+              : settings.energy.value > 30
+                ? - 5
+                : - 5
+            : 0
+          ),
+          action: settings.energy.value > 2 ? 'decrement' : null
         })
         return
     }
@@ -170,14 +236,8 @@ const App = () => {
             isPaused={isPaused} 
             isDone={isTimerDone}
             inBreak={inBreak} 
-            onTogglePause={event => togglePause(!isPaused)} 
-            onToggleBreak={event => {
-              if (inBreak) {
-                updateEnergy({ factor: 5, action: 'increment' })
-              }
-              toggleBreak(!inBreak)
-              
-            }} 
+            onTogglePause={event => onPauseChange(event)} 
+            onToggleBreak={event => onBreakChange(event)} 
             onRestart={event => {
               updateSettings({
                 ...settings,

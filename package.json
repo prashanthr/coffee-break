@@ -22,7 +22,8 @@
     "react-colorful": "^4.4.4",
     "react-dom": "^16.13.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.3"
+    "react-scripts": "3.4.3",
+    "reapop": "^3.0.2"
   },
   "scripts": {
     "start": "react-scripts start",

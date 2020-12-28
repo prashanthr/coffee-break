@@ -14,12 +14,12 @@ const Routes = () => {
     loadAnalytics(config.analytics.google.propertyId)
   }, [])
   return (
-    <Router>
-      <Switch>
-        <Route exact path='/' component={Home} />
-        <Route path="/app" component={App} />
-      </Switch>
-    </Router>
+      <Router>
+        <Switch>
+          <Route exact path='/' component={Home} />
+          <Route path='/app' component={App} />
+        </Switch>
+      </Router>
   )
 }
 
