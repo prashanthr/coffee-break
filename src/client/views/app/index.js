@@ -21,14 +21,18 @@ import {
 } from '../../components/notification/payloads'
 import './index.css'
 
+const displayIntroNotifications = ({ notifyFunc }) => {
+  console.log('displaying intro...')
+  introNotifications
+    .forEach(n => {
+      effects.notifyWithTimeout({ notifyFunc, ...n })
+    })
+}
+
 const App = () => {
   const { notify, notifications, dismissNotification } = effects.useNotifications()
   useEffect(() => {
-    notify(notifyOnWelcome)
-    introNotifications
-      .forEach(n => {
-        setTimeout(() => notify(n.payload), n.timeout)
-      })
+    displayIntroNotifications({ notifyFunc: notify })
   }, [])
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -272,7 +276,8 @@ const App = () => {
           />
         </div>
         <AppSettings 
-          settings={settings} 
+          settings={settings}
+          onDisplayIntroNotifications={(event) => displayIntroNotifications({ notifyFunc: notify })}
           onUpdate={({ key, property, data }) => {
             console.log('update', key, property, data)
             updateSettings({

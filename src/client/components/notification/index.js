@@ -22,7 +22,10 @@ const themes = {
 
 const effects = {
   useNotifications,
-  setUpNotifications
+  setUpNotifications,
+  notifyWithTimeout: ({ notifyFunc, payload = {}, timeout = 1000 }) => {
+    setTimeout(() => notifyFunc(payload), timeout)
+  }
 }
 
 const statuses = {

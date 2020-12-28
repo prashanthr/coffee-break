@@ -1,31 +1,43 @@
 import { statuses } from './index'
 import { sample } from 'lodash'
-
-export const notifyOnWelcome = ({
-  title: 'Welcome to Coffee Break ☕️',
-  status: statuses.info,
-  dismissible: true,
-  dismissAfter: 3000
-})
+const setIntroShown = () => {
+  const item = window.localStorage.getItem('intro-seen')
+  if (!item) {
+    window.localStorage.setItem('intro-item', true)
+  }
+}
+const isIntroShown = () => {
+  const item = window.localStorage.getItem('intro-seen')
+  return item
+}
 
 export const introNotifications = [{
+  payload: {
+    title: 'Welcome to Coffee Break ☕️',
+    status: statuses.info,
+    dismissible: true,
+    dismissAfter: 3000
+  },
+  timeout: 1000
+}, {
   payload: {
     title: `This is a productivity app designed to help you focus. It's based on the pomodoro principle 🍅`,
     status: statuses.info,
     showDismissButton: true,
     dismissible: true,
-    dismissAfter: 40000
+    dismissAfter: 40000,
+    onDismiss: setIntroShown
   },
   timeout: 2500
 }, {
   payload: {
     title: `
-      Here's how it works:<br /><br />
+      Here's how it works:<br />
       1. Focus on work (or something) for a short period of time<br />
       2. Then take a short break<br />
       3. Repeat as needed<br />
       4. Adjust settings to your desire<br />
-      5. Remember to hydrate and feed yourself.<br />
+      5. Remember to hydrate and feed yourself<br />
     `,
     allowHTML: true,
     status: statuses.info,

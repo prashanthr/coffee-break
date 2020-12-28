@@ -5,9 +5,11 @@ import RadioSetting from './radio-setting'
 import ColorPicker from './color-picker'
 import Counter from './counter'
 import Energy from './energy'
+import Button from '../button'
 import './index.css'
 
-const AppSettings = ({ settings, onChange, onUpdate }) => {
+
+const AppSettings = ({ settings, onChange, onUpdate, onDisplayIntroNotifications }) => {
   const timeSettings = [{
     settingKey: 'focus',
     time: settings.focus.time,
@@ -151,6 +153,10 @@ const AppSettings = ({ settings, onChange, onUpdate }) => {
             onUpdate={cSetting.onUpdate}
           />
         ))}
+        <Button 
+          value='Show Intro'
+          onClick={onDisplayIntroNotifications}
+        />
       </div>
     </div>
   )
