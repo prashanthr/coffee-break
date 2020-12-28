@@ -1,5 +1,6 @@
 import React from 'react'
 // import { Notifications } from '@universal-apps/swan-react'
+// const { NotificationsProvider, NotificationsSystem, themes, effects, statuses, transitions } = Notifications.appNotifications
 import NotificationsSystem, { 
   NotificationsProvider, 
   useNotifications, 
@@ -37,7 +38,7 @@ const transitions = {
 const AppNotificationsWrapper = ({ children }) => {
   // 1. Retrieve the notifications to display, and the function used to dismiss a notification.
   const { notifications, dismissNotification } = effects.useNotifications()
-  setUpNotifications({
+  effects.setUpNotifications({
     defaultProps: {
         position: 'top-right',
         dismissible: true,
@@ -57,7 +58,7 @@ const AppNotificationsWrapper = ({ children }) => {
               // 3. Pass the function used to dismiss a notification.
               dismissNotification={(id) => dismissNotification(id)}
               // 4. Pass a builtIn theme or a custom theme.
-              theme={atalhoTheme}
+              theme={themes.atalhoTheme}
           />
           {children}
       </div>
