@@ -107,6 +107,40 @@ const AppSettings = ({ settings, onChange, onUpdate, onDisplayIntroNotifications
         }
       })
     }
+  }, {
+      label: 'Auto Save',
+      settingKey: 'autoSave',
+      value: settings.autoSave.value,
+      choices: [{
+        id: 'auto-save-on',
+        value: true,
+        label: 'On',
+        labelClassName: settings.autoSave.value === true
+          ? 'coffee-break-app-setting-radio-setting-radio-input-label-checked'
+          : 'coffee-break-app-setting-radio-setting-radio-input-label',
+        isSelected: settings.autoSave.value === true
+      }, {
+        id: 'auto-save-off',
+        value: false,
+        label: 'Off',
+        labelClassName: settings.autoSave.value === false
+          ? 'coffee-break-app-setting-radio-setting-radio-input-label-checked'
+          : 'coffee-break-app-setting-radio-setting-radio-input-label',
+        isSelected: settings.autoSave.value === false
+      }],
+      onUpdate: ({ key, data })  => {
+        console.log('yo notification onUpdateChoice', data)
+        let value = typeof data.value === 'string' 
+          ? data.value === 'true'
+          : data.value === true
+        onUpdate({ 
+          key,
+          data: {
+            ...data,
+            value
+          }
+        })
+      }
   }]
   return (
     <div className='animate__animated animate__fadeInRight coffee-break-app-settings-grid'>

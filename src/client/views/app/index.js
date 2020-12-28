@@ -50,6 +50,9 @@ const App = () => {
     notifications: {
       value: true
     },
+    autoSave: {
+      value: true
+    },
     focus: {
       time: {
         hour: 0,
