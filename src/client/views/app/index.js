@@ -6,6 +6,7 @@ import AppSettings from '../../components/app-settings'
 import { set, get, sample } from 'lodash'
 import { effects } from '../../components/notification'
 import { 
+  introNotifications,
   notifyOnPaused, 
   notifyOnResume, 
   notifyOnWelcome,
@@ -24,6 +25,10 @@ const App = () => {
   const { notify, notifications, dismissNotification } = effects.useNotifications()
   useEffect(() => {
     notify(notifyOnWelcome)
+    introNotifications
+      .forEach(n => {
+        setTimeout(() => notify(n.payload), n.timeout)
+      })
   }, [])
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -32,7 +37,7 @@ const App = () => {
     // Clear timeout if the component is unmounted
     return () => clearTimeout(timer)
   })
-  const [isPaused, togglePause] = useState(false)
+  const [isPaused, togglePause] = useState(true) // Start the timer paused
   const [inBreak, toggleBreak] = useState(false)
   const [isTimerDone, setTimerDone] = useState(false)
   const [settings, updateSettings] = useState({

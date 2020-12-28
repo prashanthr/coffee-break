@@ -2,11 +2,49 @@ import { statuses } from './index'
 import { sample } from 'lodash'
 
 export const notifyOnWelcome = ({
-  title: 'Welcome to Coffee Break',
+  title: 'Welcome to Coffee Break ☕️',
   status: statuses.info,
   dismissible: true,
-  dismissAfter: 2500
+  dismissAfter: 3000
 })
+
+export const introNotifications = [{
+  payload: {
+    title: `This is a productivity app designed to help you focus. It's based on the pomodoro principle 🍅`,
+    status: statuses.info,
+    showDismissButton: true,
+    dismissible: true,
+    dismissAfter: 40000
+  },
+  timeout: 2500
+}, {
+  payload: {
+    title: `
+      Here's how it works:<br /><br />
+      1. Focus on work (or something) for a short period of time<br />
+      2. Then take a short break<br />
+      3. Repeat as needed<br />
+      4. Adjust settings to your desire<br />
+      5. Remember to hydrate and feed yourself.<br />
+    `,
+    allowHTML: true,
+    status: statuses.info,
+    showDismissButton: true,
+    dismissible: true,
+    dismissAfter: 45000
+  },
+  timeout: 6000
+}, {
+  payload: {
+    title: `Hit ▶ Start to begin focusing. <br /><br />Go forth and conquer the world 🚀`,
+    allowHTML: true,
+    status: statuses.info,
+    showDismissButton: true,
+    dismissible: true,
+    dismissAfter: 50000
+  },
+  timeout: 9000
+}]
 
 export const notifyOnPaused = ({ onDismiss, onPrimaryClick }) => ({
   title: sample([

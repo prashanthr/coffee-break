@@ -58,11 +58,17 @@ const AppSettings = ({ settings, onChange, onUpdate }) => {
       id: 'timer-progress',
       value: 'progress',
       label: 'Progress',
+      labelClassName: settings.timer.value === 'progress' 
+        ? 'coffee-break-app-setting-radio-setting-radio-input-label-checked'
+        : 'coffee-break-app-setting-radio-setting-radio-input-label',
       isSelected: settings.timer.value === 'progress'
     }, {
       id: 'timer-countdown',
       value: 'countdown',
       label: 'Countdown',
+      labelClassName: settings.timer.value === 'countdown' 
+        ? 'coffee-break-app-setting-radio-setting-radio-input-label-checked'
+        : 'coffee-break-app-setting-radio-setting-radio-input-label',
       isSelected: settings.timer.value === 'countdown'
     }],
     onUpdate
@@ -74,19 +80,29 @@ const AppSettings = ({ settings, onChange, onUpdate }) => {
       id: 'notifications-on',
       value: true,
       label: 'On',
+      labelClassName: settings.notifications.value === true
+        ? 'coffee-break-app-setting-radio-setting-radio-input-label-checked'
+        : 'coffee-break-app-setting-radio-setting-radio-input-label',
       isSelected: settings.notifications.value === true
     }, {
       id: 'notifications-off',
       value: false,
       label: 'Off',
+      labelClassName: settings.notifications.value === false
+        ? 'coffee-break-app-setting-radio-setting-radio-input-label-checked'
+        : 'coffee-break-app-setting-radio-setting-radio-input-label',
       isSelected: settings.notifications.value === false
     }],
     onUpdate: ({ key, data })  => {
+      console.log('yo notification onUpdateChoice', data)
+      let value = typeof data.value === 'string' 
+        ? data.value === 'true'
+        : data.value === true
       onUpdate({ 
         key,
         data: {
           ...data,
-          value: data.value === 'true'
+          value
         }
       })
     }
@@ -97,7 +113,8 @@ const AppSettings = ({ settings, onChange, onUpdate }) => {
         <Energy value={settings.energy.value} />
         <h2>Settings</h2>
         {radioSettings.map((rSetting, idx) => (
-          <RadioSetting 
+          <RadioSetting
+            key={idx}
             settingKey={rSetting.settingKey}
             label={rSetting.label}
             value={rSetting.value} 

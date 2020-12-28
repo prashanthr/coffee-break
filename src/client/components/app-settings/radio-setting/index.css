@@ -55,15 +55,27 @@
 	cursor: pointer;
 }
 
-.coffee-break-app-setting-radio-setting-radio-input > input:checked + label {
+/* .coffee-break-app-setting-radio-setting-radio-input > input:checked + label {
 	background-color: #1fd279;
 	box-shadow: none;
-}
+} */
 
-.coffee-break-app-setting-radio-setting-radio-input label:first-of-type {
+/* .coffee-break-app-setting-radio-setting-radio-input label:first-of-type {
 	border-radius: 4px 0 0 4px;
 }
 
 .coffee-break-app-setting-radio-setting-radio-input label:last-of-type {
 	border-radius: 0 4px 4px 0;
+} */
+
+.coffee-break-app-setting-radio-setting-radio-input-label {
+	/* border-radius: 4px 0 0 4px; */
 }
+
+.coffee-break-app-setting-radio-setting-radio-input-label-checked {
+	background-color: #1fd279 !important;
+	box-shadow: none;
+	/* border-radius: 0 4px 4px 0; */
+}
+
+
