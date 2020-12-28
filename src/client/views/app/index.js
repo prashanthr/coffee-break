@@ -3,7 +3,7 @@ import Layout from '../layout'
 import Timer from '../../components/timer'
 import TimerControls from '../../components/timer-controls'
 import AppSettings from '../../components/app-settings'
-import { set, get, sample } from 'lodash'
+import { set, get, sample, pick } from 'lodash'
 import { effects } from '../../components/notification'
 import { 
   introNotifications,
@@ -19,6 +19,8 @@ import {
   notifyNutrientGain
 } from '../../components/notification/payloads'
 import './index.css'
+import { getLocalStorage, setLocalStorage } from '../../util/local-storage';
+import { act } from 'react-dom/test-utils';
 
 const displayIntroNotifications = ({ notifyFunc }) => {
   console.log('displaying intro...')
@@ -28,7 +30,82 @@ const displayIntroNotifications = ({ notifyFunc }) => {
     })
 }
 
+const defaultSettings = {
+  timer: {
+    value: 'progress'
+  },
+  notifications: {
+    value: true
+  },
+  sync: {
+    value: true
+  },
+  focus: {
+    time: {
+      hour: 0,
+      minute: 25, // Pomodoro
+      second: 0
+    },
+    elapsed: {
+      time: {
+        hour: 0,
+        minute: 0,
+        second: 0
+      },
+      pomodoros: 0
+    },
+    strokeColor: '#d367c1'
+  },
+  break: {
+    time: {
+      hour: 0,
+      minute: 10,
+      second: 0
+    },
+    elapsed: {
+      time: {
+        hour: 0,
+        minute: 0,
+        second: 0
+      },
+    },
+    strokeColor: 'orange'
+  },
+  energy: {
+    value: 100
+  },
+  nutrients: {
+    coffee: {
+      label: '☕ Coffee',
+      max: 3,
+      value: 0,
+      notify: true
+    },
+    water: {
+      label: '💧 Water',
+      value: 0
+    },
+    food: {
+      label: `${sample(['🍔','🍕','🍟','🥗','🍜','🍩'])} Food`,
+      value: 0,
+      max: 3,
+      notify: true
+    }
+  }
+}
+
+const settingsLocalStorageKey = 'coffee-break-timer-settings'
+const settingsSyncExpiry = new Date().getTime() + 43200
+
 const App = () => {
+  const [isPaused, togglePause] = useState(true) // Start the timer paused
+  const [inBreak, toggleBreak] = useState(false)
+  const [isTimerDone, setTimerDone] = useState(false)
+  const [settings, updateSettings] = useState({
+    ...defaultSettings,
+    ...getLocalStorage(settingsLocalStorageKey)
+  })
+  // Notifications
   const { notify } = effects.useNotifications()
   useEffect(() => {
     displayIntroNotifications({ notifyFunc: notify })  
@@ -40,75 +117,40 @@ const App = () => {
     // Clear timeout if the component is unmounted
     return () => clearTimeout(timer)
   })
-  const [isPaused, togglePause] = useState(true) // Start the timer paused
-  const [inBreak, toggleBreak] = useState(false)
-  const [isTimerDone, setTimerDone] = useState(false)
-  const [settings, updateSettings] = useState({
-    timer: {
-      value: 'progress'
-    },
-    notifications: {
-      value: true
-    },
-    autoSave: {
-      value: true
-    },
-    focus: {
-      time: {
-        hour: 0,
-        minute: 25, // Pomodoro
-        second: 0
-      },
-      elapsed: {
-        time: {
-          hour: 0,
-          minute: 0,
-          second: 0
-        },
-        pomodoros: 0
-      },
-      strokeColor: '#d367c1'
-    },
-    break: {
-      time: {
-        hour: 0,
-        minute: 10,
-        second: 0
-      },
-      elapsed: {
-        time: {
-          hour: 0,
-          minute: 0,
-          second: 0
-        },
-      },
-      strokeColor: 'orange'
-    },
-    energy: {
-      value: 100
-    },
-    nutrients: {
-      coffee: {
-        label: '☕ Coffee',
-        max: 3,
-        value: 0,
-        notify: true
-      },
-      water: {
-        label: '💧 Water',
-        value: 0
-      },
-      food: {
-        label: `${sample(['🍔','🍕','🍟','🥗','🍜','🍩'])} Food`,
-        value: 0,
-        max: 3,
-        notify: true
-      }
-    }
-  })
+
   const activeSettingKey = inBreak ? 'break' : 'focus'
   const activeSetting = settings[activeSettingKey]
+  const getStart = ({ time, elapsed }) => {
+    const isElapsedZero = (
+      elapsed.time.hour === 0 && 
+      elapsed.time.minute === 0 && 
+      elapsed.time.second === 0
+    )
+    const hourDiff = time.hour - elapsed.time.hour
+    const minDiff = time.minute - elapsed.time.minute
+    const secondDiff = time.second - elapsed.time.second
+    return isElapsedZero ? time : {
+      // hour: hourDiff < 0 ? 0 : hourDiff,
+      // minute: secondDiff < 0 ? (time.minute - (secondDiff % 60 === 0 ? secondDiff / 60 : 1) - ) : time.minute,
+      // second: secondDiff < 0 ? 0 : secondDiff
+      ...time
+    }
+  } 
   console.log('set', settings)
+  
+  useEffect(() => {
+    if (settings.sync.value === true) {
+      console.log('exp', settingsSyncExpiry)
+      setLocalStorage(settingsLocalStorageKey, settings, settingsSyncExpiry)
+      console.log('get', getLocalStorage(settingsLocalStorageKey))
+    }
+  }, [settings])
+
+  const onResetSettings = () => {
+    setLocalStorage(settingsLocalStorageKey, null)
+    updateSettings(defaultSettings)
+  }
+
   const onPauseChange = (event) => {
     togglePause(!isPaused)
     notify(isPaused 
@@ -266,7 +308,7 @@ const App = () => {
             className='coffee-break-timer' 
             digitClassName='coffee-break-timer-digit' 
             isPaused={isPaused}
-            start={activeSetting.time}
+            start={getStart(activeSetting)}
             elapsed={activeSetting.elapsed.time}
             strokeColor={activeSetting.strokeColor}
             onStart={onStart}
@@ -278,6 +320,7 @@ const App = () => {
         <AppSettings 
           settings={settings}
           onDisplayIntroNotifications={(event) => displayIntroNotifications({ notifyFunc: notify })}
+          onResetSettings={onResetSettings}
           onUpdate={({ key, property, data }) => {
             console.log('update', key, property, data)
             updateSettings({

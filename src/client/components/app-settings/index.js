@@ -7,8 +7,9 @@ import Counter from './counter'
 import Energy from './energy'
 import Button from '../button'
 import './index.css'
+import ButtonGroup from '../button-group'
 
-const AppSettings = ({ settings, onChange, onUpdate, onDisplayIntroNotifications }) => {
+const AppSettings = ({ settings, onChange, onUpdate, onDisplayIntroNotifications, onResetSettings }) => {
   const timeSettings = [{
     settingKey: 'focus',
     time: settings.focus.time,
@@ -108,25 +109,25 @@ const AppSettings = ({ settings, onChange, onUpdate, onDisplayIntroNotifications
       })
     }
   }, {
-      label: 'Auto Save',
-      settingKey: 'autoSave',
-      value: settings.autoSave.value,
+      label: 'Sync Settings',
+      settingKey: 'sync',
+      value: settings.sync.value,
       choices: [{
-        id: 'auto-save-on',
+        id: 'sync-on',
         value: true,
         label: 'On',
-        labelClassName: settings.autoSave.value === true
+        labelClassName: settings.sync.value === true
           ? 'coffee-break-app-setting-radio-setting-radio-input-label-checked'
           : 'coffee-break-app-setting-radio-setting-radio-input-label',
-        isSelected: settings.autoSave.value === true
+        isSelected: settings.sync.value === true
       }, {
-        id: 'auto-save-off',
+        id: 'sync-off',
         value: false,
         label: 'Off',
-        labelClassName: settings.autoSave.value === false
+        labelClassName: settings.sync.value === false
           ? 'coffee-break-app-setting-radio-setting-radio-input-label-checked'
           : 'coffee-break-app-setting-radio-setting-radio-input-label',
-        isSelected: settings.autoSave.value === false
+        isSelected: settings.sync.value === false
       }],
       onUpdate: ({ key, data })  => {
         console.log('yo notification onUpdateChoice', data)
@@ -186,9 +187,14 @@ const AppSettings = ({ settings, onChange, onUpdate, onDisplayIntroNotifications
             onUpdate={cSetting.onUpdate}
           />
         ))}
-        <Button 
-          value='Show Intro'
-          onClick={onDisplayIntroNotifications}
+        <ButtonGroup
+          buttons={[{
+            value: 'Show Intro',
+            onClick: onDisplayIntroNotifications
+          }, {
+            value: 'Reset',
+            onClick: onResetSettings
+          }]}
         />
       </div>
     </div>
@@ -260,7 +266,8 @@ AppSettings.propTypes = {
   }),
   onUpdate: PropTypes.func,
   onChange: PropTypes.func,
-  onDisplayIntroNotifications: PropTypes.func
+  onDisplayIntroNotifications: PropTypes.func,
+  onResetSettings: PropTypes.func
 }
 
 export default AppSettings
