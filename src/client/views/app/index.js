@@ -31,7 +31,7 @@ const displayIntroNotifications = ({ notifyFunc }) => {
 const App = () => {
   const { notify } = effects.useNotifications()
   useEffect(() => {
-    displayIntroNotifications({ notifyFunc: notify })
+    displayIntroNotifications({ notifyFunc: notify })  
   }, [])
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -196,7 +196,9 @@ const App = () => {
   const onNutrientUpdate = ({ nutrient, property }) => {
     console.log('onNutrientUpdate', nutrient, property)
     const nutrientInQuestion = settings.nutrients[nutrient]
+    console.log('nutrientInQuestion', nutrientInQuestion)
     if (nutrientInQuestion.notify && nutrientInQuestion.value > nutrientInQuestion.max) {
+      console.log('Notifying about overload...')
       notify(notifyNutrientOverload({ nutrient: nutrientInQuestion.label }))
     }
     switch (property) {

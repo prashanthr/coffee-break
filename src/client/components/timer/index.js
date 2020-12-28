@@ -30,9 +30,13 @@ const Timer = ({ elapsed, type, start, className, digitClassName, isPaused, stro
     onStart()
   }, [start])
   useEffect(() => {
-    if (currentTime.hour === 0 && currentTime.minute === 0 && currentTime.second === 0) {
-      onEnd()
-    }
+    if (
+        currentTime.hour === 0 && 
+        currentTime.minute === 0 && 
+        currentTime.second === 0
+      ) {
+        onEnd()
+      }
   }, [currentTime])
   useEffect(() => {
     if (elapsedTime.minute > 0 && elapsedTime.minute % 25 === 0) {

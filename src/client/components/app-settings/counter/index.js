@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import Button from '../../button'
 import './index.css'
@@ -8,30 +8,30 @@ const Counter = ({ label, settingKey, value, onUpdate }) => {
     value,
     lastAction: null
   })
-  useEffect(() => {
-    onUpdate({ key: settingKey, property: state.lastAction, data: state })
-  }, [state])
+  const handleUpdate = ({ settingKey, value, lastAction }) => {
+    onUpdate({ key: settingKey, property: state.lastAction, data: {
+        ...state,
+        value,
+        lastAction
+      } 
+    })
+    updateState({
+      ...state,
+      value,
+      lastAction
+    }) 
+  }
   return (
     <div className='coffee-break-app-settings-counter'>
       {label}
       <Button
         value={'-'}
-        onClick={event => updateState({
-            ...state,
-            value: state.value - 1,
-            lastAction: 'decrement'
-          })
-        }
+        onClick={event => handleUpdate({ settingKey, value: state.value - 1, lastAction: 'decrement'}) }
       />
       <span className='coffee-break-app-settings-counter-value'>{value}</span>
       <Button
         value={'+'}
-        onClick={event => updateState({
-            ...state,
-            value: state.value + 1,
-            lastAction: 'increment'
-          })
-        }
+        onClick={event => handleUpdate({ settingKey, value: state.value + 1, lastAction: 'increment'}) }
       />
     </div>
   )

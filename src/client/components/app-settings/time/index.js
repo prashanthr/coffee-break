@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { FormControls } from '@universal-apps/swan-react'
 
 const TimeSetting = ({ time, label, settingKey, onChange, onUpdate }) => {
@@ -6,9 +6,30 @@ const TimeSetting = ({ time, label, settingKey, onChange, onUpdate }) => {
   const [state, updateState] = useState({ 
     time: { hour, minute, second } 
   })
-  useEffect(() => {
-    onUpdate({ key: settingKey, data: state })
-  }, [state])
+  const handleUpdate = ({ event, settingKey, unit, min, max }) => {
+    const input = Number(event.target.value)
+    const value = input <= max && input >= min 
+      ? input
+      : input < min 
+        ? min
+        : max
+    onUpdate({ key: settingKey, data: {
+        ...state,
+        time: {
+          ...state.time,
+          [unit]: value
+        }
+      }
+    })
+    updateState({
+      ...state,
+      time: {
+        ...state.time,
+        [unit]: value
+      }
+    })
+    
+  }
   return (
     <div className='coffee-break-app-settings-time'>
       <span>{label}</span>
@@ -19,12 +40,12 @@ const TimeSetting = ({ time, label, settingKey, onChange, onUpdate }) => {
         min={0}
         defaultValue={state.time.hour}
         onChange={event => {
-          updateState({
-            ...state,
-            time: {
-              ...state.time,
-              hour: Number(event.target.value)
-            }
+          handleUpdate({
+            event,
+            settingKey,
+            unit: 'hour',
+            min: 0,
+            max: 99
           })
         }}
       />
@@ -35,12 +56,12 @@ const TimeSetting = ({ time, label, settingKey, onChange, onUpdate }) => {
         min={0}
         defaultValue={state.time.minute}
         onChange={event => {
-          updateState({
-            ...state,
-            time: {
-              ...state.time,
-              minute: Number(event.target.value)
-            }
+          handleUpdate({
+            event,
+            settingKey,
+            unit: 'minute',
+            min: 0,
+            max: 99
           })
         }}
       />
@@ -51,12 +72,12 @@ const TimeSetting = ({ time, label, settingKey, onChange, onUpdate }) => {
         min={0}
         defaultValue={state.time.second}
         onChange={event => {
-          updateState({
-            ...state,
-            time: {
-              ...state.time,
-              second: Number(event.target.value)
-            }
+          handleUpdate({
+            event,
+            settingKey,
+            unit: 'second',
+            min: 0,
+            max: 59
           })
         }}
       />

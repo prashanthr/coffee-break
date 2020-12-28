@@ -25,7 +25,7 @@ export const introNotifications = [{
     status: statuses.info,
     showDismissButton: true,
     dismissible: true,
-    dismissAfter: 40000,
+    dismissAfter: 35000,
     onDismiss: setIntroShown
   },
   timeout: 2500
@@ -43,9 +43,9 @@ export const introNotifications = [{
     status: statuses.info,
     showDismissButton: true,
     dismissible: true,
-    dismissAfter: 45000
+    dismissAfter: 40000
   },
-  timeout: 6000
+  timeout: 5000
 }, {
   payload: {
     title: `Hit ▶ Start to begin focusing. <br /><br />Go forth and conquer the world 🚀`,
@@ -53,9 +53,9 @@ export const introNotifications = [{
     status: statuses.info,
     showDismissButton: true,
     dismissible: true,
-    dismissAfter: 50000
+    dismissAfter: 45000
   },
-  timeout: 9000
+  timeout: 8000
 }]
 
 export const notifyOnPaused = ({ onDismiss, onPrimaryClick }) => ({

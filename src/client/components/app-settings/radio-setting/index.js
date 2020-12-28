@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { FormControls } from '@universal-apps/swan-react'
 import './index.css'
 
@@ -6,9 +6,17 @@ const RadioSetting = ({ label, value, settingKey, onUpdate, choices }) => {
   const [state, updateState] = useState({
     value
   })
-  useEffect(() => {
-    onUpdate({ key: settingKey, data: state })
-  }, [state])
+  const handleChange = ({ settingKey, value }) => {
+    onUpdate({ key: settingKey, data: {
+        ...state,
+        value
+      } 
+    })
+    updateState({
+      ...state,
+      value
+    })
+  }
   return (
     <div className='coffee-break-app-setting-radio-setting-grid'>
       <span>{label}</span>
@@ -19,10 +27,7 @@ const RadioSetting = ({ label, value, settingKey, onUpdate, choices }) => {
           choices={choices}
           onChange={event => {
             console.log('Notif on change event', event.target, event.target.value)
-            updateState({
-              ...state,
-              value: event.target.value
-            })
+            handleChange({ settingKey, value: event.target.value })
           }}
           elementOnly 
         />
