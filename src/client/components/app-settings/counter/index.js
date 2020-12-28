@@ -26,7 +26,11 @@ const Counter = ({ label, settingKey, value, onUpdate }) => {
       {label}
       <Button
         value={'-'}
-        onClick={event => handleUpdate({ settingKey, value: state.value - 1, lastAction: 'decrement'}) }
+        onClick={event => {
+          if (state.value > 0) {
+            handleUpdate({ settingKey, value: state.value - 1, lastAction: 'decrement'}) 
+          }
+        }}
       />
       <span className='coffee-break-app-settings-counter-value'>{value}</span>
       <Button
