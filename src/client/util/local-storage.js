@@ -12,7 +12,7 @@ export const setLocalStorage = (key, value, expiry = undefined) => (
 
 export const getLocalStorage = (key, defaultValue = null) => {
   const lsItem = window.localStorage.getItem(key)
-  if (!lsItem) {
+  if (!lsItem || JSON.parse(lsItem) === null) {
     return defaultValue
   } else {
     const item = JSON.parse(lsItem)

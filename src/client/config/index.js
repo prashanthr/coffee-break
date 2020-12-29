@@ -61,7 +61,7 @@ const defaultConfig = {
           },
           pomodoros: 0
         },
-        strokeColor: '#5d65e7'
+        strokeColor: '#d367c1'
       },
       break: {
         time: {

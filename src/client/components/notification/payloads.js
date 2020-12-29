@@ -61,8 +61,8 @@ export const notifyOnResume = () => ({
   title: sample([
     'Welcome back, your excellency 🤴',
     'Hello again, old friend 👋',
-    'Good to see you again mate',
-    `Ah, you've returned from your quest. Let us begin`
+    'Good to see you again friend 👋',
+    `Ah, you've returned from your quest 🐴. Let us begin`
   ]),
   status: statuses.none,
   dismissible: true,

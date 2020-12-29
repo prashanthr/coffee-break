@@ -5,9 +5,8 @@ import RadioSetting from './radio-setting'
 import ColorPicker from './color-picker'
 import Counter from './counter'
 import Energy from './energy'
-import Button from '../button'
-import './index.css'
 import ButtonGroup from '../button-group'
+import './index.css'
 
 const AppSettings = ({ settings, onChange, onUpdate, onDisplayIntroNotifications, onResetSettings }) => {
   const timeSettings = [{
@@ -109,6 +108,7 @@ const AppSettings = ({ settings, onChange, onUpdate, onDisplayIntroNotifications
     }
   }, {
       label: 'Sync Settings',
+      hidden: true,
       settingKey: 'sync',
       value: settings.sync.value,
       choices: [{
@@ -147,7 +147,7 @@ const AppSettings = ({ settings, onChange, onUpdate, onDisplayIntroNotifications
       <div className='coffee-break-app-settings'>
         <Energy value={settings.energy.value} />
         <h2>Settings</h2>
-        {radioSettings.map((rSetting, idx) => (
+        {radioSettings.filter(setting => !setting.hidden).map((rSetting, idx) => (
           <RadioSetting
             key={idx}
             settingKey={rSetting.settingKey}

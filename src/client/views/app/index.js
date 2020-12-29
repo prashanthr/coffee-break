@@ -3,7 +3,7 @@ import Layout from '../layout'
 import Timer from '../../components/timer'
 import TimerControls from '../../components/timer-controls'
 import AppSettings from '../../components/app-settings'
-import { set, get, sample, pick } from 'lodash'
+import { set, get } from 'lodash'
 import { effects } from '../../components/notification'
 import { 
   introNotifications,
@@ -25,7 +25,7 @@ import config from '../../config'
 const defaultSettings = config.app.defaultSettings
 
 const settingsLocalStorageKey = config.app.cache.keys.settings
-const getSettingsSyncExpiry = () => new Date().getTime() + config.app.cache.ttl
+// const getSettingsSyncExpiry = () => new Date().getTime() + config.app.cache.ttl
 const introLocalStorageKey = config.app.cache.keys.intro
 
 const displayIntroNotifications = ({ notifyFunc }) => {
@@ -35,12 +35,20 @@ const displayIntroNotifications = ({ notifyFunc }) => {
     })
 }
 
+const showIntroOnFirstLoad = ({ notifyFunc }) => {
+  const isIntroShown = getLocalStorage(introLocalStorageKey)
+    if (!isIntroShown) {
+      displayIntroNotifications({ notifyFunc })  
+      setLocalStorage(introLocalStorageKey, true)
+    }
+}
+
 const App = () => {
   const [isPaused, togglePause] = useState(true) // Start the timer paused
   const [inBreak, toggleBreak] = useState(false)
   const [isTimerDone, setTimerDone] = useState(false)
-  const [settingsSyncExpiry, setSettingsSyncExpiry] = useState(getSettingsSyncExpiry())
-  const cachedSettings = getLocalStorage(settingsLocalStorageKey) || {}
+  // const [settingsSyncExpiry, setSettingsSyncExpiry] = useState(getSettingsSyncExpiry())
+  // const cachedSettings = getLocalStorage(settingsLocalStorageKey) || {}
   // console.log('cachedSettings', cachedSettings.sync, defaultSettings.sync)
   const [settings, updateSettings] = useState({
     ...defaultSettings,
@@ -53,13 +61,14 @@ const App = () => {
       notify(payload)
     }
   }
-  useEffect(() => {
-    const isIntroShown = getLocalStorage(introLocalStorageKey)
-    if (!isIntroShown) {
-      displayIntroNotifications({ notifyFunc: appNotify })  
-      setLocalStorage(introLocalStorageKey, true)
-    }
-  }, [])
+  showIntroOnFirstLoad({ notifyFunc: appNotify })
+  // useEffect(() => {
+  //   const isIntroShown = getLocalStorage(introLocalStorageKey)
+  //   if (!isIntroShown) {
+  //     displayIntroNotifications({ notifyFunc: appNotify })  
+  //     setLocalStorage(introLocalStorageKey, true)
+  //   }
+  // }, [])
   useEffect(() => {
     const timer = setTimeout(() => {
       appNotify(notifyNutrientReminder())
