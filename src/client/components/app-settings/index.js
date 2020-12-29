@@ -143,6 +143,7 @@ const AppSettings = ({ settings, onChange, onUpdate, onDisplayIntroNotifications
         })
       }
   }]
+  const showStrokeSettings = settings.timer.value === 'progress'
   return (
     <div className='animate__animated animate__fadeInRight coffee-break-app-settings-grid'>
       <div className='coffee-break-app-settings'>
@@ -177,7 +178,7 @@ const AppSettings = ({ settings, onChange, onUpdate, onDisplayIntroNotifications
             onUpdate={counter.onUpdate}
           />
         ))}
-        {strokeSettings.map((cSetting, idx) => (
+        {showStrokeSettings && strokeSettings.map((cSetting, idx) => (
           <ColorPicker
             label={cSetting.label}
             key={idx}

@@ -49,3 +49,7 @@ a:hover {
   margin-top: 2%;
   text-align: center;
 }
+
+.coffee-break-intro {
+  line-height: 1.2rem;
+}

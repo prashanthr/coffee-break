@@ -25,6 +25,7 @@ const Counter = ({ label, settingKey, value, onUpdate }) => {
     <div className='coffee-break-app-settings-counter'>
       {label}
       <Button
+        className='coffee-break-app-settings-counter-btn'
         value={'-'}
         onClick={event => {
           if (state.value > 0) {
@@ -34,6 +35,7 @@ const Counter = ({ label, settingKey, value, onUpdate }) => {
       />
       <span className='coffee-break-app-settings-counter-value'>{value}</span>
       <Button
+        className='coffee-break-app-settings-counter-btn'
         value={'+'}
         onClick={event => handleUpdate({ settingKey, value: state.value + 1, lastAction: 'increment'}) }
       />

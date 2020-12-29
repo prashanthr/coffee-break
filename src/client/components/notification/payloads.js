@@ -1,15 +1,5 @@
 import { statuses, positions } from './index'
 import { sample } from 'lodash'
-const setIntroShown = () => {
-  const item = window.localStorage.getItem('intro-seen')
-  if (!item) {
-    window.localStorage.setItem('intro-item', true)
-  }
-}
-const isIntroShown = () => {
-  const item = window.localStorage.getItem('intro-seen')
-  return item
-}
 
 export const introNotifications = [{
   payload: {
@@ -26,18 +16,22 @@ export const introNotifications = [{
     showDismissButton: true,
     dismissible: true,
     dismissAfter: 35000,
-    onDismiss: setIntroShown
   },
   timeout: 2500
 }, {
   payload: {
     title: `
-      Here's how it works:<br />
-      1. Focus on work (or something) for a short period of time<br />
-      2. Then take a short break<br />
+      <div style='line-height: 1.6;'>
+      Here's how it works:<br /><br />
+      1. Focus on work (or something) for a short period of time (25m ideally) <br />
+      2. Take a short break (5 m)<br />
       3. Repeat as needed<br />
       4. Adjust settings to your desire<br />
       5. Remember to hydrate and feed yourself<br />
+      
+      <br />Hit ▶ Start to begin focusing<br /><br />
+      Go forth and conquer the world 🚀
+      </div>
     `,
     allowHTML: true,
     status: statuses.info,
@@ -46,16 +40,6 @@ export const introNotifications = [{
     dismissAfter: 40000
   },
   timeout: 5000
-}, {
-  payload: {
-    title: `Hit ▶ Start to begin focusing. <br /><br />Go forth and conquer the world 🚀`,
-    allowHTML: true,
-    status: statuses.info,
-    showDismissButton: true,
-    dismissible: true,
-    dismissAfter: 45000
-  },
-  timeout: 8000
 }]
 
 export const notifyOnPaused = ({ onDismiss, onPrimaryClick }) => ({

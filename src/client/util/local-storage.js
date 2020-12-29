@@ -10,15 +10,15 @@ export const setLocalStorage = (key, value, expiry = undefined) => (
     )
 )
 
-export const getLocalStorage = (key) => {
+export const getLocalStorage = (key, defaultValue = null) => {
   const lsItem = window.localStorage.getItem(key)
   if (!lsItem) {
-    return null
+    return defaultValue
   } else {
     const item = JSON.parse(lsItem)
     if (item.expiry && new Date().getTime > item.expiry) {
-      setLocalStorage(key, null)
-      return null
+      setLocalStorage(key, defaultValue)
+      return defaultValue
     } else {
       return item.data
     }

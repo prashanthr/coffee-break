@@ -22,14 +22,6 @@ import './index.css'
 import { getLocalStorage, setLocalStorage } from '../../util/local-storage';
 import { act } from 'react-dom/test-utils';
 
-const displayIntroNotifications = ({ notifyFunc }) => {
-  console.log('displaying intro...')
-  introNotifications
-    .forEach(n => {
-      effects.notifyWithTimeout({ notifyFunc, ...n })
-    })
-}
-
 const defaultSettings = {
   timer: {
     value: 'progress'
@@ -38,7 +30,7 @@ const defaultSettings = {
     value: true
   },
   sync: {
-    value: true
+    value: false
   },
   focus: {
     time: {
@@ -59,7 +51,7 @@ const defaultSettings = {
   break: {
     time: {
       hour: 0,
-      minute: 10,
+      minute: 5,
       second: 0
     },
     elapsed: {
@@ -96,6 +88,15 @@ const defaultSettings = {
 
 const settingsLocalStorageKey = 'coffee-break-timer-settings'
 const settingsSyncExpiry = new Date().getTime() + 43200
+const introLocalStorageKey = 'coffee-break-intro'
+
+const displayIntroNotifications = ({ notifyFunc }) => {
+  console.log('displaying intro...')
+  introNotifications
+    .forEach(n => {
+      effects.notifyWithTimeout({ notifyFunc, ...n })
+    })
+}
 
 const App = () => {
   const [isPaused, togglePause] = useState(true) // Start the timer paused
@@ -103,12 +104,16 @@ const App = () => {
   const [isTimerDone, setTimerDone] = useState(false)
   const [settings, updateSettings] = useState({
     ...defaultSettings,
-    ...getLocalStorage(settingsLocalStorageKey)
+    ...getLocalStorage(settingsLocalStorageKey, {})
   })
   // Notifications
   const { notify } = effects.useNotifications()
   useEffect(() => {
-    displayIntroNotifications({ notifyFunc: notify })  
+    const isIntroShown = getLocalStorage(introLocalStorageKey)
+    if (!isIntroShown) {
+      displayIntroNotifications({ notifyFunc: notify })  
+      setLocalStorage(introLocalStorageKey, true)
+    }
   }, [])
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -120,34 +125,20 @@ const App = () => {
 
   const activeSettingKey = inBreak ? 'break' : 'focus'
   const activeSetting = settings[activeSettingKey]
-  const getStart = ({ time, elapsed }) => {
-    const isElapsedZero = (
-      elapsed.time.hour === 0 && 
-      elapsed.time.minute === 0 && 
-      elapsed.time.second === 0
-    )
-    const hourDiff = time.hour - elapsed.time.hour
-    const minDiff = time.minute - elapsed.time.minute
-    const secondDiff = time.second - elapsed.time.second
-    return isElapsedZero ? time : {
-      // hour: hourDiff < 0 ? 0 : hourDiff,
-      // minute: secondDiff < 0 ? (time.minute - (secondDiff % 60 === 0 ? secondDiff / 60 : 1) - ) : time.minute,
-      // second: secondDiff < 0 ? 0 : secondDiff
-      ...time
-    }
-  } 
   console.log('set', settings)
   
   useEffect(() => {
     if (settings.sync.value === true) {
       console.log('exp', settingsSyncExpiry)
       setLocalStorage(settingsLocalStorageKey, settings, settingsSyncExpiry)
-      console.log('get', getLocalStorage(settingsLocalStorageKey))
+      console.log('get', getLocalStorage(settingsLocalStorageKey, {}))
+    } else {
+      setLocalStorage(settingsLocalStorageKey, {})
     }
   }, [settings])
 
   const onResetSettings = () => {
-    setLocalStorage(settingsLocalStorageKey, null)
+    setLocalStorage(settingsLocalStorageKey, {})
     updateSettings(defaultSettings)
   }
 
@@ -308,7 +299,7 @@ const App = () => {
             className='coffee-break-timer' 
             digitClassName='coffee-break-timer-digit' 
             isPaused={isPaused}
-            start={getStart(activeSetting)}
+            start={activeSetting.time}
             elapsed={activeSetting.elapsed.time}
             strokeColor={activeSetting.strokeColor}
             onStart={onStart}
