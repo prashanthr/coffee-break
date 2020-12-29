@@ -92,7 +92,7 @@ export const notifyOnPomodoro = ({
 })
 
 export const notifyNutrientGain = () => ({
-  title: `${sample(['Aah that was refreshing', 'Thanks. I needed that.', 'Recharged.'])}`,
+  title: `${sample(['Aah that was refreshing', 'Thanks. I needed that 🙌', 'Recharged 🔌'])}`,
   position: positions.bottomRight,
   status: statuses.none,
   dismissible: true,

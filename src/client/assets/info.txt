@@ -1,0 +1,14 @@
+
+Hope you enjoy your new logo, here are the people that
+made your beautiful logo happen :)
+font name: IBMPlexSans-Text
+font link: https://fonts.google.com/specimen/IBM+Plex+Sans
+font author: Mike Abbink
+font author site: https://www.mikeabbink.com/
+
+
+icon designer: Samuel Q. Green
+icon designer link: /samuelqgreen
+        
+{"bg":"#FCFCFC","icon":"#E07A72","font":"#E07A72","slogan":"#f48e86"}
+      

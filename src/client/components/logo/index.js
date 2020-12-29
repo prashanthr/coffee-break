@@ -1,5 +1,5 @@
 import React from 'react'
-import LogoImg from '../../assets/logo.svg'
+import LogoImg from '../../assets/vector/default-monochrome.svg'
 import Link from '../link'
 import './index.css'
 
