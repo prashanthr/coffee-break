@@ -1,16 +1,15 @@
 import React from 'react'
+import Footer from '../../components/footer'
 import Logo from '../../components/logo'
 import './index.css'
 
 const Layout = ({ children }) => (
   <React.Fragment>
     <Logo />
-    <div className='site-heading'>
-      <h1>Coffee Break</h1>
-    </div>
     <div className='content'>
       {children}
     </div>
+    <Footer />
   </React.Fragment>
 )
 

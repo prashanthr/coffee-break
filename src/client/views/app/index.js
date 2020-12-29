@@ -41,7 +41,7 @@ const App = () => {
   const [isTimerDone, setTimerDone] = useState(false)
   const [settingsSyncExpiry, setSettingsSyncExpiry] = useState(getSettingsSyncExpiry())
   const cachedSettings = getLocalStorage(settingsLocalStorageKey) || {}
-  console.log('cachedSettings', cachedSettings.sync, defaultSettings.sync)
+  // console.log('cachedSettings', cachedSettings.sync, defaultSettings.sync)
   const [settings, updateSettings] = useState({
     ...defaultSettings,
     // ...cachedSettings
@@ -130,7 +130,6 @@ const App = () => {
     setTimerDone(false)
   }
   const onTick = ({ time }) => {
-      console.log('tick', settings.sync)
       updateSettings({
         ...settings,
         [activeSettingKey]: {

@@ -4,8 +4,9 @@
   --coffee-break-secondary-color: #d367c1;
   --coffee-break-tertiary-color: #022a4b;/*#82aaff;*//*#00bbcb;*/
   --coffee-break-error-color: #F7B267;
-  --coffee-break-link-color: #ab79d6;
-  --coffee-break-link-hover-color: #ab79d6;/*white;*/
+  --coffee-break-link-color: #e26049;
+  --coffee-break-link-hover-color: white;
+  --coffee-break-button-background-color: #e26049;
 }
 
 body {
@@ -22,6 +23,10 @@ body {
 
 .coffee-break-error {
   color: var(--coffee-break-error-color)
+}
+
+.coffee-break-accent {
+  color: var(--coffee-break-link-color);
 }
 
 a, a:visited, a:-webkit-any-link {

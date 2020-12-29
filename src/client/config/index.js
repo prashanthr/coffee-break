@@ -4,8 +4,6 @@ import { sample } from 'lodash'
 const defaultConfig = {
   debug: true,
   logErrorsToConsole: true,
-  apiBaseUrl: 'http://localhost:8088',
-  ipUrl: "https://ipinfo.io/json",
   coffeeUrl: "https://www.buymeacoffee.com/TGuwXOA",
   analytics: {
     google: {
@@ -63,7 +61,7 @@ const defaultConfig = {
           },
           pomodoros: 0
         },
-        strokeColor: '#d367c1'
+        strokeColor: '#5d65e7'
       },
       break: {
         time: {
@@ -107,7 +105,6 @@ const defaultConfig = {
 
 const prodConfig = {
   ...defaultConfig,
-  apiBaseUrl: 'https://today-api.universal-apps.xyz',
   debug: false,
   logErrorsToConsole: true
 }
