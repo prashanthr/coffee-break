@@ -1,12 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './client/index.css';
-import App from './client/App';
+import Routes from './client/routes';
 import * as serviceWorker from './client/serviceWorker';
+import ErrorBoundary from './client/components/error-boundary'
+import { NotificationsProvider, AppNotificationsWrapper } from './client/components/notification'
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ErrorBoundary>
+      <NotificationsProvider>
+        <AppNotificationsWrapper>
+          <Routes />
+        </AppNotificationsWrapper>
+      </NotificationsProvider>
+    </ErrorBoundary>
   </React.StrictMode>,
   document.getElementById('root')
 );

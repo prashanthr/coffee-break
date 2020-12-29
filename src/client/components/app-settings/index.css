@@ -1,0 +1,39 @@
+.coffee-break-app-settings-grid {
+  /* margin-top: 2rem;
+  vertical-align: middle;
+  margin-left: 20%;
+  margin-right: 20%; */
+  font-size: 20px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.coffee-break-app-settings {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 5px;
+}
+
+@media (max-width: 600px) {
+  .coffee-break-app-settings-grid {
+    /* margin-left: 20px;
+    margin-right: 20px; */
+    margin: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+.coffee-break-app-settings-grid input {
+  background: var(--coffe-break-background-color);
+  color: var(--coffee-break-primary-color);
+  padding: 5px 10px;
+  font-size: 15px;
+}
+
+.coffee-break-app-settings-time {
+  display: inline-grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+}

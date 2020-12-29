@@ -1,0 +1,29 @@
+.coffee-break-timer {
+  width: 500px;
+  height: 500px;
+  padding-top: 20px;
+  margin-left: 10%;
+}
+
+@media (max-width: 600px) {
+  .coffee-break-timer {
+    margin: auto;
+  }
+}
+
+.coffee-break-timer-digit {
+  font-size: 64px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.coffee-break-timer-digit-countdown {
+  font-family: 'ArialRounded', -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  font-size: 120px;
+}
+
+.swan-timer-progress-circular__path-elapsed {
+  stroke: var(--coffe-break-background-color);
+}

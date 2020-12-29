@@ -1,0 +1,7 @@
+{
+  "healthCheck": {
+    "enabled": true,
+    "endpoint": "",
+    "schedule": "0 0 * * *"
+  }
+}
