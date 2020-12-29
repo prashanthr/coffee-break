@@ -1,23 +1,24 @@
 import { statuses, positions } from './index'
 import { sample } from 'lodash'
+import config from '../../config'
 
 export const introNotifications = [{
   payload: {
     title: 'Welcome to Coffee Break ☕️',
     status: statuses.info,
     dismissible: true,
-    dismissAfter: 3000
+    dismissAfter: config.app.notifications.timeout.short
   },
-  timeout: 1000
+  timeout: config.app.notifications.timeout.quick
 }, {
   payload: {
     title: `This is a productivity app designed to help you focus. It's based on the pomodoro principle 🍅`,
     status: statuses.info,
     showDismissButton: true,
     dismissible: true,
-    dismissAfter: 35000,
+    dismissAfter: config.app.notifications.timeout.long,
   },
-  timeout: 2500
+  timeout: config.app.notifications.timeout.fallShort
 }, {
   payload: {
     title: `
@@ -37,12 +38,12 @@ export const introNotifications = [{
     status: statuses.info,
     showDismissButton: true,
     dismissible: true,
-    dismissAfter: 40000
+    dismissAfter: config.app.notifications.timeout.eternity
   },
-  timeout: 5000
+  timeout: config.app.notifications.timeout.long
 }]
 
-export const notifyOnPaused = ({ onDismiss, onPrimaryClick }) => ({
+export const notifyOnPaused = () => ({
   title: sample([
     'Timer Paused. Go slay dragons 🐉',
     `I'll keep watch while you're gone 👀`,
@@ -53,13 +54,7 @@ export const notifyOnPaused = ({ onDismiss, onPrimaryClick }) => ({
   status: statuses.info,
   dismissible: true,
   showDismissButton: true,
-  dismissAfter: 5000,
-  // onDismiss,
-  // buttons: [{
-  //   name: 'Resume',
-  //   primary: true,
-  //   onClick: () => onPrimaryClick()
-  // }],
+  dismissAfter: config.app.notifications.timeout.long,
 })
 
 export const notifyOnResume = () => ({
@@ -71,7 +66,7 @@ export const notifyOnResume = () => ({
   ]),
   status: statuses.none,
   dismissible: true,
-  dismissAfter: 3000
+  dismissAfter: config.app.notifications.timeout.short
 })
 
 
@@ -79,21 +74,21 @@ export const notifyOnFocus = ({
   title: `Okay, now let's get some work done! 💪`,
   status: statuses.info,
   dismissible: true,
-  dismissAfter: 2000
+  dismissAfter: config.app.notifications.timeout.default
 })
 
 export const notifyOnBreak = ({
   title: 'Take a break. You deserve it 🧃',
   status: statuses.info,
   dismissible: true,
-  dismissAfter: 2000
+  dismissAfter: config.app.notifications.timeout.default
 })
 
 export const notifyOnPomodoro = ({
   title: 'Congrats! You just completed a pomodoro cycle 🏅',
   status: statuses.success,
   dismissible: true,
-  dismissAfter: 2000
+  dismissAfter: config.app.notifications.timeout.default
 })
 
 export const notifyNutrientGain = () => ({
@@ -101,7 +96,7 @@ export const notifyNutrientGain = () => ({
   position: positions.bottomRight,
   status: statuses.none,
   dismissible: true,
-  dismissAfter: 2500
+  dismissAfter: config.app.notifications.timeout.fallShort
 })
 
 export const notifyNutrientReminder = () => ({
@@ -116,7 +111,7 @@ export const notifyNutrientOverload = ({ nutrient }) => ({
   position: positions.bottomRight,
   status: statuses.warning,
   dismissible: true,
-  dismissAfter: 3000
+  dismissAfter: config.app.notifications.timeout.short
 })
 
 export const notifyOnEnergyBoost = ({
@@ -124,7 +119,7 @@ export const notifyOnEnergyBoost = ({
   position: positions.bottomRight,
   status: statuses.success,
   dismissible: true,
-  dismissAfter: 2000
+  dismissAfter: config.app.notifications.timeout.default
 })
 
 export const notifyOnEnergyDrain = () => ({
@@ -136,6 +131,6 @@ export const notifyOnEnergyDrain = () => ({
   postion: positions.bottomRight,
   status: statuses.warning,
   dismissible: true,
-  dismissAfter: 2000 
+  dismissAfter: config.app.notifications.timeout.default 
 })
 

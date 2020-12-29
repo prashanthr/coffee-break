@@ -25,7 +25,6 @@ const Timer = ({ elapsed, type, start, className, digitClassName, isPaused, stro
     return () => clearTimeout(timer)
   })
   useEffect(() => {
-    console.log('start changed')
     setTime(start)
     onStart()
   }, [start])
@@ -40,7 +39,6 @@ const Timer = ({ elapsed, type, start, className, digitClassName, isPaused, stro
   }, [currentTime])
   useEffect(() => {
     if (elapsedTime.minute > 0 && elapsedTime.minute % 25 === 0) {
-      console.log('pomo', elapsedTime)
       onPomodoroComplete({ time: elapsedTime })
     }
   }, [elapsedTime])

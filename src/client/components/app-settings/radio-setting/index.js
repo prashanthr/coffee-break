@@ -26,7 +26,6 @@ const RadioSetting = ({ label, value, settingKey, onUpdate, choices }) => {
           name='timer-type'
           choices={choices}
           onChange={event => {
-            console.log('Notif on change event', event.target, event.target.value)
             handleChange({ settingKey, value: event.target.value })
           }}
           elementOnly 

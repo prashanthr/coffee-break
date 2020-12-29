@@ -51,11 +51,11 @@ const AppNotificationsWrapper = ({ children }) => {
         position: positions.topRight,
         dismissible: true,
         showDismissButton: true,
-        onAdd: () => console.log('Notification added'),
-        onDismiss: () => console.log('Notification dismissed')
+        // onAdd: () => console.log('Notification added'),
+        // onDismiss: () => console.log('Notification dismissed')
     },
     // customizeNotification: ((notification: NewNotification) => void) | null;
-    generateId: () => new Date().getTime().toString()
+    // generateId: () => new Date().getTime().toString()
   })
 
   return (

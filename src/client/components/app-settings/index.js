@@ -96,7 +96,6 @@ const AppSettings = ({ settings, onChange, onUpdate, onDisplayIntroNotifications
       isSelected: settings.notifications.value === false
     }],
     onUpdate: ({ key, data })  => {
-      console.log('yo notification onUpdateChoice', data)
       let value = typeof data.value === 'string' 
         ? data.value === 'true'
         : data.value === true
@@ -130,7 +129,6 @@ const AppSettings = ({ settings, onChange, onUpdate, onDisplayIntroNotifications
         isSelected: settings.sync.value === false
       }],
       onUpdate: ({ key, data })  => {
-        console.log('yo notification onUpdateChoice', data)
         let value = typeof data.value === 'string' 
           ? data.value === 'true'
           : data.value === true

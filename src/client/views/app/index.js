@@ -20,78 +20,15 @@ import {
 } from '../../components/notification/payloads'
 import './index.css'
 import { getLocalStorage, setLocalStorage } from '../../util/local-storage';
-import { act } from 'react-dom/test-utils';
+import config from '../../config'
 
-const defaultSettings = {
-  timer: {
-    value: 'progress'
-  },
-  notifications: {
-    value: true
-  },
-  sync: {
-    value: false
-  },
-  focus: {
-    time: {
-      hour: 0,
-      minute: 25, // Pomodoro
-      second: 0
-    },
-    elapsed: {
-      time: {
-        hour: 0,
-        minute: 0,
-        second: 0
-      },
-      pomodoros: 0
-    },
-    strokeColor: '#d367c1'
-  },
-  break: {
-    time: {
-      hour: 0,
-      minute: 5,
-      second: 0
-    },
-    elapsed: {
-      time: {
-        hour: 0,
-        minute: 0,
-        second: 0
-      },
-    },
-    strokeColor: 'orange'
-  },
-  energy: {
-    value: 100
-  },
-  nutrients: {
-    coffee: {
-      label: '☕ Coffee',
-      max: 3,
-      value: 0,
-      notify: true
-    },
-    water: {
-      label: '💧 Water',
-      value: 0
-    },
-    food: {
-      label: `${sample(['🍔','🍕','🍟','🥗','🍜','🍩'])} Food`,
-      value: 0,
-      max: 3,
-      notify: true
-    }
-  }
-}
+const defaultSettings = config.app.defaultSettings
 
-const settingsLocalStorageKey = 'coffee-break-timer-settings'
-const settingsSyncExpiry = new Date().getTime() + 43200
-const introLocalStorageKey = 'coffee-break-intro'
+const settingsLocalStorageKey = config.app.cache.keys.settings
+const getSettingsSyncExpiry = () => new Date().getTime() + config.app.cache.ttl
+const introLocalStorageKey = config.app.cache.keys.intro
 
 const displayIntroNotifications = ({ notifyFunc }) => {
-  console.log('displaying intro...')
   introNotifications
     .forEach(n => {
       effects.notifyWithTimeout({ notifyFunc, ...n })
@@ -102,51 +39,57 @@ const App = () => {
   const [isPaused, togglePause] = useState(true) // Start the timer paused
   const [inBreak, toggleBreak] = useState(false)
   const [isTimerDone, setTimerDone] = useState(false)
+  const [settingsSyncExpiry, setSettingsSyncExpiry] = useState(getSettingsSyncExpiry())
+  const cachedSettings = getLocalStorage(settingsLocalStorageKey) || {}
+  console.log('cachedSettings', cachedSettings.sync, defaultSettings.sync)
   const [settings, updateSettings] = useState({
     ...defaultSettings,
-    ...getLocalStorage(settingsLocalStorageKey, {})
+    // ...cachedSettings
   })
   // Notifications
   const { notify } = effects.useNotifications()
+  const appNotify = (payload) => {
+    if (settings.notifications.value === true) {
+      notify(payload)
+    }
+  }
   useEffect(() => {
     const isIntroShown = getLocalStorage(introLocalStorageKey)
     if (!isIntroShown) {
-      displayIntroNotifications({ notifyFunc: notify })  
+      displayIntroNotifications({ notifyFunc: appNotify })  
       setLocalStorage(introLocalStorageKey, true)
     }
   }, [])
   useEffect(() => {
     const timer = setTimeout(() => {
-      notify(notifyNutrientReminder())
-    }, 3600000)
+      appNotify(notifyNutrientReminder())
+    }, config.app.notifications.timeout.nutrientReminder)
     // Clear timeout if the component is unmounted
     return () => clearTimeout(timer)
   })
 
   const activeSettingKey = inBreak ? 'break' : 'focus'
   const activeSetting = settings[activeSettingKey]
-  console.log('set', settings)
   
-  useEffect(() => {
-    if (settings.sync.value === true) {
-      console.log('exp', settingsSyncExpiry)
-      setLocalStorage(settingsLocalStorageKey, settings, settingsSyncExpiry)
-      console.log('get', getLocalStorage(settingsLocalStorageKey, {}))
-    } else {
-      setLocalStorage(settingsLocalStorageKey, {})
-    }
-  }, [settings])
+  // useEffect(() => {
+  //   console.log('sett sync', settings.sync)
+  //   if (settings.sync.value === true) {
+  //     setLocalStorage(settingsLocalStorageKey, settings, settingsSyncExpiry)
+  //   } else {
+  //     // setLocalStorage(settingsLocalStorageKey, {})
+  //   }
+  // }, [settings])
 
   const onResetSettings = () => {
-    setLocalStorage(settingsLocalStorageKey, {})
+    setLocalStorage(settingsLocalStorageKey, null)
     updateSettings(defaultSettings)
   }
 
   const onPauseChange = (event) => {
     togglePause(!isPaused)
-    notify(isPaused 
+    appNotify(isPaused 
       ? notifyOnResume()
-      : notifyOnPaused({})
+      : notifyOnPaused()
     )
   }
   const onBreakChange = (event) => {
@@ -154,20 +97,19 @@ const App = () => {
       updateEnergy({ factor: 5, action: 'increment' })
     }
     toggleBreak(!inBreak)
-    notify(inBreak ? notifyOnFocus : notifyOnBreak)
+    appNotify(inBreak ? notifyOnFocus : notifyOnBreak)
   }
   const updateEnergy = ({ factor, action }) => {
-    console.log('Updating energy', factor, action)
     const getValue = () => {
       const currentValue = settings.energy.value
-      const max = 100
-      const min = 0
+      const max = config.app.energy.max
+      const min = config.app.energy.min
       switch(action) {
         case 'increment':
-          notify(notifyOnEnergyBoost)
+          appNotify(notifyOnEnergyBoost)
           return Math.min(currentValue + factor, max)
         case 'decrement':
-          notify(notifyOnEnergyDrain())
+          appNotify(notifyOnEnergyDrain())
           return Math.max(currentValue - factor, min)
         default:
           return currentValue
@@ -182,14 +124,13 @@ const App = () => {
     })
   }
   const onEnd = () => {
-    console.log('timer is done')
     setTimerDone(true)
   }
   const onStart = () => {
-    console.log('timer started')
     setTimerDone(false)
   }
   const onTick = ({ time }) => {
+      console.log('tick', settings.sync)
       updateSettings({
         ...settings,
         [activeSettingKey]: {
@@ -202,9 +143,8 @@ const App = () => {
       })
   }
   const onPomodoroComplete = ({ time }) => {
-    console.log('Pomodoro Complete at', time, 'inBreak', inBreak)
     if (!inBreak) { 
-      notify(notifyOnPomodoro)
+      appNotify(notifyOnPomodoro)
       updateSettings({
         ...settings,
         focus: {
@@ -230,12 +170,12 @@ const App = () => {
     }
   }
   const onNutrientUpdate = ({ nutrient, property }) => {
-    console.log('onNutrientUpdate', nutrient, property)
     const nutrientInQuestion = settings.nutrients[nutrient]
-    console.log('nutrientInQuestion', nutrientInQuestion)
-    if (nutrientInQuestion.notify && nutrientInQuestion.value > nutrientInQuestion.max) {
-      console.log('Notifying about overload...')
-      notify(notifyNutrientOverload({ nutrient: nutrientInQuestion.label }))
+    if (
+        nutrientInQuestion.notify && 
+        nutrientInQuestion.value > nutrientInQuestion.max
+      ) {
+      appNotify(notifyNutrientOverload({ nutrient: nutrientInQuestion.label }))
     }
     switch (property) {
       case 'increment':
@@ -251,7 +191,7 @@ const App = () => {
           ),
           action: settings.energy.value <= 98 ? 'increment' : null
         })
-        notify(notifyNutrientGain())
+        appNotify(notifyNutrientGain())
         return
       case 'decrement':
         updateEnergy({
@@ -310,10 +250,9 @@ const App = () => {
         </div>
         <AppSettings 
           settings={settings}
-          onDisplayIntroNotifications={(event) => displayIntroNotifications({ notifyFunc: notify })}
+          onDisplayIntroNotifications={(event) => displayIntroNotifications({ notifyFunc: appNotify })}
           onResetSettings={onResetSettings}
           onUpdate={({ key, property, data }) => {
-            console.log('update', key, property, data)
             updateSettings({
               ...settings,
               ...set(settings, key, {
@@ -326,6 +265,14 @@ const App = () => {
                 nutrient: key.replace('nutrients.', ''),
                 property
               })
+            }
+            console.log('sett sync', settings.sync)
+            console.log('onupdate', key, data)
+            if (settings.sync.value === true) {
+              
+              // setLocalStorage(settingsLocalStorageKey, settings, settingsSyncExpiry)
+            } else {
+              // setLocalStorage(settingsLocalStorageKey, null)
             }
           }
         } />
