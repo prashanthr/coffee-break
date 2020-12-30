@@ -1,6 +1,6 @@
 .coffee-break-timer {
-  width: 500px;
-  height: 500px;
+  width: 500px !important;
+  height: 500px !important;
   padding-top: 20px;
   margin-left: 10%;
 }

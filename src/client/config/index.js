@@ -7,7 +7,7 @@ const defaultConfig = {
   coffeeUrl: "https://www.buymeacoffee.com/TGuwXOA",
   analytics: {
     google: {
-      propertyId: ''
+      propertyId: 'UA-117106220-6'
     }
   },
   author: {
