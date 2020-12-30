@@ -9,5 +9,5 @@ fi
 
 NAME_TAG="$CONTAINER_NAME:$TAG_NAME"
 
-TAG=$NAME_TAG ./bin/docker-build.sh && \
-CONTAINER_NAME=$CONTAINER_NAME TAG=$NAME_TAG ./bin/docker-run.sh
+TAG=$NAME_TAG ./scripts/docker-build.sh && \
+CONTAINER_NAME=$CONTAINER_NAME TAG=$NAME_TAG ./scripts/docker-run.sh
