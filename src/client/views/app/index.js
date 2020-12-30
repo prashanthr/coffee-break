@@ -274,10 +274,7 @@ const App = () => {
                 property
               })
             }
-            console.log('sett sync', settings.sync)
-            console.log('onupdate', key, data)
-            if (settings.sync.value === true) {
-              
+            if (settings.sync.value === true) { 
               // setLocalStorage(settingsLocalStorageKey, settings, settingsSyncExpiry)
             } else {
               // setLocalStorage(settingsLocalStorageKey, null)
