@@ -1,5 +1,6 @@
 import { isProd } from './env'
 export const loadAnalytics = (propertyTag) => {
+    /*
     const enabled = isProd()
     if (enabled && propertyTag) {
       window.dataLayer = window.dataLayer || []
@@ -10,4 +11,5 @@ export const loadAnalytics = (propertyTag) => {
     } else {
       console.info('Analytics is disabled')
     }
+    */
 }
