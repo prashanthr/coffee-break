@@ -27,9 +27,12 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "start-server": "babel-node ./src/server/index.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "docker-build-and-run": "./scripts/docker-build-and-run.sh",
+    "docker-build-and-release": "CONTAINER_NAME=coffee-break TAG_NAME=latest ./scripts/docker-build-and-release.sh"
   },
   "eslintConfig": {
     "extends": "react-app"
