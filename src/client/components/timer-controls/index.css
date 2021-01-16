@@ -4,3 +4,12 @@
   margin-left: 20%;
   margin-right: 20%;
 }
+
+@media (max-width: 600px) {
+  .coffee-break-timer-controls {
+    margin-top: 3rem;
+  }
+  .coffee-break-timer-controls > .coffee-break-button-group {
+    grid-column-gap: 20px;
+  } 
+}
