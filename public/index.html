@@ -13,7 +13,8 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'UA-117106220-4');
+      gtag('config', 'UA-117106220-4', { 'anonymize_ip': true,'allow_ad_personalization_signals': false });
+      console.info('Analytics loaded');
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#E07A72" />
