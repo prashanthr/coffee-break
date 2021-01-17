@@ -21,8 +21,9 @@
     /* margin-left: 20px;
     margin-right: 20px; */
     margin: auto;
-    padding-left: 10px;
-    padding-right: 10px;
+    /* padding-left: 10px;
+    padding-right: 10px; */
+    max-width: 90%;
   }
 }
 

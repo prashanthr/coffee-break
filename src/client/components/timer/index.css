@@ -8,6 +8,8 @@
 @media (max-width: 600px) {
   .coffee-break-timer {
     margin: auto;
+    width: 100% !important;
+    height: 100% !important;
   }
 }
 

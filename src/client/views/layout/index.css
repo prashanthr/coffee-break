@@ -6,7 +6,12 @@
   --coffee-break-error-color: #F7B267;
   --coffee-break-link-color: #E07A72;
   --coffee-break-link-hover-color: white;
+  --coffee-break-green-color: #1fd279;
   --coffee-break-button-background-color: #4d6cde;
+  --coffee-break-progress-100-color: var(--coffee-break-green-color);
+  --coffee-break-progress-50-color: #f7a311;
+  --coffee-break-progress-25-color: #e8e965;
+  --coffee-break-progress-0-color: #e26049;
 }
 
 body {
@@ -17,8 +22,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #282c35;
-  color: white;
+  background-color: var(--coffe-break-background-color);
+  color: var(--coffee-break-primary-color);
 }
 
 .coffee-break-error {
