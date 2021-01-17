@@ -19,11 +19,11 @@
 }
 
 .coffee-break-energy-progress-wrap progress::-webkit-progress-value {
-  background: #1fd279;
+  background: var(--coffee-break-progress-100-color);
 }
 
 .coffee-break-energy-progress-wrap progress::-webkit-progress-bar {
-  background: #282c35;
+  background: var(--coffe-break-background-color);
 }
 
 /* progress {
@@ -51,14 +51,14 @@ progress::-moz-progress-bar {
 }
 
 .coffee-break-energy-progress-wrap-50 progress::-webkit-progress-value {
-  background: #f7a311;
+  background: var(--coffee-break-progress-50-color);
 }
 
 .coffee-break-energy-progress-wrap-25 progress::-webkit-progress-value {
-  background: #e8e965;
+  background: var(--coffee-break-progress-25-color);
 }
 
 .coffee-break-energy-progress-wrap-0 progress::-webkit-progress-value {
-  background: #e26049;
+  background: var(--coffee-break-progress-0-color);
 }
 
