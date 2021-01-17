@@ -1,4 +1,4 @@
-import { isProd } from './env'
+// import { isProd } from './env'
 export const loadAnalytics = (propertyTag) => {
     /*
     const enabled = isProd()
