@@ -11,6 +11,9 @@
     width: 100% !important;
     height: 100% !important;
   }
+  .coffee-break-timer-with-digit {
+    margin: auto 3%;
+  }
 }
 
 .coffee-break-timer-digit {
@@ -21,6 +24,12 @@
 
 .coffee-break-timer-digit-countdown {
   font-size: 120px;
+}
+
+@media (max-width: 600px) {
+  .coffee-break-timer-digit-countdown {
+    font-size: 80px;
+  }
 }
 
 .swan-timer-progress-circular__path-elapsed {

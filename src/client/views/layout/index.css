@@ -34,9 +34,9 @@ body {
   color: var(--coffee-break-link-color);
 }
 
-a, a:visited, a:-webkit-any-link {
-  color: var(--coffee-break-link-color);
+a, a:visited, a:hover, a:focus, a:active, a:-webkit-any-link {
   text-decoration: none;
+  color: var(--coffee-break-link-color);
 }
 
 a:hover {

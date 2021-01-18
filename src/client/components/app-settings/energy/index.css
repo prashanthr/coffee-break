@@ -11,19 +11,25 @@
 }
 
 .coffee-break-energy-progress-wrap progress {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
   border: none;
-  /* background: red; */
-  /* width: 400px;
-  height: 60px; */
-  /* background: crimson; */
+  background: var(--coffe-break-background-color);
+}
+
+.coffee-break-energy-progress-wrap progress::-webkit-progress-bar {
+  background: var(--coffe-break-background-color);
+}
+.coffee-break-energy-progress-wrap progress::-moz-progress-bar {
+  background: var(--coffe-break-background-color);
 }
 
 .coffee-break-energy-progress-wrap progress::-webkit-progress-value {
   background: var(--coffee-break-progress-100-color);
 }
-
-.coffee-break-energy-progress-wrap progress::-webkit-progress-bar {
-  background: var(--coffe-break-background-color);
+.coffee-break-energy-progress-wrap progress::-moz-progress-bar  {
+  background: var(--coffee-break-progress-100-color);
 }
 
 /* progress {
@@ -54,7 +60,16 @@ progress::-moz-progress-bar {
   background: var(--coffee-break-progress-50-color);
 }
 
+.coffee-break-energy-progress-wrap-50 progress::-moz-progress-bar {
+  background: var(--coffee-break-progress-50-color);
+}
+
+
 .coffee-break-energy-progress-wrap-25 progress::-webkit-progress-value {
+  background: var(--coffee-break-progress-25-color);
+}
+
+.coffee-break-energy-progress-wrap-25 progress::-moz-progress-bar {
   background: var(--coffee-break-progress-25-color);
 }
 
@@ -62,3 +77,6 @@ progress::-moz-progress-bar {
   background: var(--coffee-break-progress-0-color);
 }
 
+.coffee-break-energy-progress-wrap-0 progress::-moz-progress-bar {
+  background: var(--coffee-break-progress-0-color);
+}

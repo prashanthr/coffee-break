@@ -13,3 +13,9 @@
     grid-column-gap: 20px;
   } 
 }
+
+@media only screen and (min-width: 768px) {
+  .coffee-break-timer-controls {
+    margin-top: 3rem;
+  }
+}
