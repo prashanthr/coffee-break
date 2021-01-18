@@ -39,7 +39,7 @@
 
 
 .coffee-break-app-setting-radio-setting-radio-input label {
-	background-color: var(--coffe-break-background-color); /*#e4e4e4;*/
+	background-color: var(--coffee-break-background-color); /*#e4e4e4;*/
 	color: var(--coffee-break-primary-color);/*rgba(0, 0, 0, 0.6);*/
 	font-size: 14px;
 	line-height: 1;

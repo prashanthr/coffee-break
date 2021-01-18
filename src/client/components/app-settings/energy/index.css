@@ -15,14 +15,14 @@
   -moz-appearance: none;
   appearance: none;
   border: none;
-  background: var(--coffe-break-background-color);
+  background: var(--coffee-break-background-color);
 }
 
 .coffee-break-energy-progress-wrap progress::-webkit-progress-bar {
-  background: var(--coffe-break-background-color);
+  background: var(--coffee-break-background-color);
 }
 .coffee-break-energy-progress-wrap progress::-moz-progress-bar {
-  background: var(--coffe-break-background-color);
+  background: var(--coffee-break-background-color);
 }
 
 .coffee-break-energy-progress-wrap progress::-webkit-progress-value {

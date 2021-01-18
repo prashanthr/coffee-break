@@ -1,5 +1,5 @@
 :root {
-  --coffe-break-background-color: #282c35;
+  --coffee-break-background-color: #282c35;
   --coffee-break-primary-color: white;
   --coffee-break-secondary-color: #d367c1;
   --coffee-break-tertiary-color: #022a4b;/*#82aaff;*//*#00bbcb;*/
@@ -22,7 +22,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: var(--coffe-break-background-color);
+  background-color: var(--coffee-break-background-color);
   color: var(--coffee-break-primary-color);
 }
 
