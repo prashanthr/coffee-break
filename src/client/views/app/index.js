@@ -244,8 +244,8 @@ const App = () => {
           />
           <Timer
             type={settings.timer.value}
-            className='coffee-break-timer' 
-            digitClassName='coffee-break-timer-digit' 
+            className={`coffee-break-timer ${settings.timer.value === 'countdown' ? 'coffee-break-timer-with-digit' : ''}`}
+            digitClassName={`coffee-break-timer-digit ${settings.timer.value === 'countdown' ? 'coffee-break-timer-digit-countdown' : ''}`}
             isPaused={isPaused}
             start={activeSetting.time}
             elapsed={activeSetting.elapsed.time}

@@ -10,11 +10,6 @@ const Timer = ({ elapsed, type, start, className, digitClassName, isPaused, stro
   const { hour, minute, second } = start
   const [currentTime, setTime] = useState({ hour, minute, second })
   const [elapsedTime, setElapsedTime] = useState(elapsed)
-  const additionalDigitClassName = (
-    type === 'progress' 
-    ? '' 
-    : 'coffee-break-timer-digit-countdown'
-  )
   useEffect(() => {
     const timer = setTimeout(() => {
       setTime(tick({ time: currentTime, countdown: true, isPaused }))
@@ -46,7 +41,7 @@ const Timer = ({ elapsed, type, start, className, digitClassName, isPaused, stro
     <TimerComponent
       type={type}
       className={`animate__animated animate__fadeInUp ${className}`} 
-      digitClassName={`${digitClassName} ${additionalDigitClassName}`}
+      digitClassName={digitClassName}
       start={start} 
       currentTime={currentTime} 
       isPaused={isPaused}
